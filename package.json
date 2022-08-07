@@ -1,0 +1,22 @@
+{
+  "name": "navod_distribution",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KennethChamara/Navod_Distribution.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KennethChamara/Navod_Distribution/issues"
+  },
+  "homepage": "https://github.com/KennethChamara/Navod_Distribution#readme",
+  "dependencies": {
+    "electron": "^20.0.1"
+  }
+}
