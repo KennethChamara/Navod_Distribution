@@ -4,27 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Singal Page App</title>
 </head>
-
 <body>
-    <select id="pageSelect" onchange="switchPage(this.value);"></select>
-    <div id="pageContent" style="width: 10rem; height: 10rem; border: 2px solid black;"></div>
-    </body>
-    <script>
-        function switchPage (newPageKey) {
-            document.getElementById('pageContent').innerHTML = pagesObj[newPageKey]['pageContentsHtml'];
-        }
-        var pagesObj    = {
-            'page1': {'pageName': "Yo, this is the first page", 'pageContentsHtml': "Page1ftw!!"},
-            'page2': {'pageName': "Hey, this is the second page", 'pageContentsHtml': "Page2ftw!!"},
-        };
-        var optionsHtml = '';
-        for (var pageKey in pagesObj) {
-            optionsHtml += "<option value=\"" + pageKey + "\">" + pagesObj[pageKey]['pageName'] + "</option>";
-        }
-        document.getElementById('pageSelect').innerHTML = optionsHtml;
-    
-        switchPage(Object.keys(pagesObj)[0]); // Switch to first page by default.
-    </script>
+    <nav class="nav">
+        <a href="/" class="nav_link" data-link>Dashboard</a>
+        <a href="/posts" class="nav_link"  data-link>posts</a>
+        <a href="/settings" class="nav_link"  data-link>settings</a>
+    </nav>
+    <script type="module" src="/static/js/index.js"></script>
+</body>
 </html>
