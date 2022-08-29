@@ -22,7 +22,7 @@
     <header>
 
         <div class="sidebar">
-            <a onclick="home()"><img src=" images\customers-icon-3.png " alt=" " style="width: 40px; height:40px; "></a>
+            <a onclick="addOrder()"><img src=" images\customers-icon-3.png " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\analytics-circle-green-512.webp " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\red_shoppictbasket_1484336512-1.png " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\micro-distribution-inventory-svg-png-icon-free-download-inventory-icon-flat-png-free-transparent-png-clipart-images-download.png " alt="
@@ -45,13 +45,21 @@
 
 
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales Summary</a>
+                    <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Order</a>
+                    <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Product</a>
+
+                </div>
+                <button class="dropdown-btn " style="box-shadow: none; "><img src="images\red_shoppictbasket_1484336512-1.png " alt=" " style="width: 40px; height:40px; ">
+                    <p style="display: inline-block; margin:20px "> Product</p>
+                    </button>
+                <div class="dropdown-container ">
+
+
+                    <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Product</a>
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Sales Rep</a>
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Product</a>
 
                 </div>
-                <a><img src="images\red_shoppictbasket_1484336512-1.png " alt=" " style="width: 40px; height:40px; ">
-                    <p class="para " style="display: inline-block; margin:20px "> Products</p>
-                </a>
                 <a><img src="images\micro-distribution-inventory-svg-png-icon-free-download-inventory-icon-flat-png-free-transparent-png-clipart-images-download.png " alt="
                     " style="width: 40px; height:40px; ">
                     <p class="para " style="display: inline-block; margin:20px "> Inventory</p>
@@ -66,7 +74,7 @@
 
 
                     <a onclick="addCustomer()" class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Customer</a>
-                    <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Sales Rep</a>
+                    <a onclick="addOrder()" class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Order</a>
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Product</a>
 
                 </div>
@@ -131,8 +139,8 @@
             document.getElementById("myLinks").style.display = "none";
         }
 
-        function home() {
-            document.getElementById("main-body").innerHTML = "<Mhome></Mhome>";
+        function addOrder() {
+            document.getElementById("main-body").innerHTML = "<add-order></add-order>";
             document.getElementById("myLinks").style.display = "none";
         }
     </script>
