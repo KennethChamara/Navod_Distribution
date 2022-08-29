@@ -17,5 +17,5 @@ function createWindow() {
 app.whenReady().then(createWindow)
 
 ipcMain.on("my", (event, obj) => {
-    console.log(obj.lname);
+    console.log(obj);
 })

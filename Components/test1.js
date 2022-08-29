@@ -18,8 +18,10 @@ export class Test1 extends HTMLElement {
             const ln = this.shadowRoot.querySelector('#lname');
             const cn = this.shadowRoot.querySelector('#cNo');
             const r = this.shadowRoot.querySelector('#route');
-            let email = e.value;
-            let obj = JSON.parse('{"fname":fn.value, "lname":ln.value, "contactNo":cn.value,"route":r.value}');
+
+            let obj = JSON.parse('{"fname":"' + fn.value + '", "lname":"' + ln.value + '", "contactNo": "' + cn.value + '", "route": "' + r.value + '"}');
+            console.log(obj);
+            ipcRenderer.send("my", obj)
 
         })
 
