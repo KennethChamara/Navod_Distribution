@@ -6,27 +6,24 @@ body {
 .sidebar {
     margin-top: 60px;
     padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
+    width: 100px;
+    background-color: #ffffff;
     position: fixed;
-    height: 100%;
     overflow: auto;
+    height: 92.4%;
 }
 
-.sidebar a {
+.sidebar a,
+.dropdown-btn {
     display: block;
     color: black;
-    padding: 16px;
+    padding: 25px;
+    padding-bottom: 20px;
     text-decoration: none;
 }
 
-.sidebar a.active {
-    background-color: #04AA6D;
-    color: white;
-}
-
 .sidebar a:hover:not(.active) {
-    background-color: #555;
+    background-color: rgba(250, 238, 210, 1);
     color: white;
 }
 
