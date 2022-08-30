@@ -123,66 +123,9 @@
     </main>
     <!--Main layout-->
 
-    <script>
-        function myFunction() {
-            var x = document.getElementById("myLinks");
-            if (x.style.display === "block") {
-                x.style.display = "none";
-
-            } else {
-                x.style.display = "block";
-            }
-        }
-
-        // adding function
-        function addCustomer() {
-            document.getElementById("main-body").innerHTML = "<add-customer></add-customer>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-
-        function addOrder() {
-            document.getElementById("main-body").innerHTML = "<add-order></add-order>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-
-        function first() {
-            document.getElementById("main-body").innerHTML = "<test-zero></test-zero>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-
-        function addPayment() {
-            document.getElementById("main-body").innerHTML = "<add-payment></add-payment>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-
-        function addProduct() {
-            document.getElementById("main-body").innerHTML = "<add-product></add-product>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-
-        function addSalesRep() {
-            document.getElementById("main-body").innerHTML = "<add-sales-rep></add-sales-rep>";
-            document.getElementById("myLinks").style.display = "none";
-        }
-        //adding function close
-    </script>
-    <script>
-        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
-
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
-        }
-    </script>
+    <script src="js/burgerMenu.js"></script>
+    <script src="js/add.js"></script>
+    <script src="js/sideBarDropDown.js"></script>
 
 
 

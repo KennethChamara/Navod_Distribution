@@ -1,6 +1,6 @@
-import { Test } from './test.js';
-import { addCustomer } from './addCustomer.js';
-import { addOrder } from './addOrder.js';
-import { addPayment } from './addPayment.js';
-import { addProduct } from './addProduct.js';
-import { addSalesRep } from './addSalesRep.js';
+import { Test } from './first.js';
+import { addCustomer } from './Add/addCustomer.js';
+import { addOrder } from './Add/addOrder.js';
+import { addPayment } from './Add/addPayment.js';
+import { addProduct } from './Add/addProduct.js';
+import { addSalesRep } from './Add/addSalesRep.js';
