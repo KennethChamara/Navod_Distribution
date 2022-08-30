@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-export class Test1 extends HTMLElement {
+export class addCustomer extends HTMLElement {
     constructor() {
         super();
 
@@ -56,7 +56,7 @@ export class Test1 extends HTMLElement {
             </style>
             
     
-        <p style="margin-left: -110px; margin-top:10px">Home/Add Customer</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()">Home</a>/Add Customer</p>
         <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 500px; margin-left: 300px;">
             <img src="images/customers-icon-3.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
             <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);"> Name</h5>
@@ -84,4 +84,4 @@ export class Test1 extends HTMLElement {
 
 }
 
-customElements.define('test-one', Test1)
+customElements.define('add-customer', addCustomer)

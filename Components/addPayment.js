@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-export class addOrder extends HTMLElement {
+export class addPayment extends HTMLElement {
     constructor() {
         super();
 
@@ -14,13 +14,13 @@ export class addOrder extends HTMLElement {
         this.render()
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
-            const date = this.shadowRoot.querySelector('#date');
-            const sid = this.shadowRoot.querySelector('#shopId');
-            const product = this.shadowRoot.querySelector('#product');
-            const quantity = this.shadowRoot.querySelector('#quantity');
+            const Ino = this.shadowRoot.querySelector('#Ino');
+            const amount = this.shadowRoot.querySelector('#amount');
+            const chequeNo = this.shadowRoot.querySelector('#chequeNo');
             const status = this.shadowRoot.querySelector('#status');
+            const customer = this.shadowRoot.querySelector('#customer');
 
-            let obj = JSON.parse('{"date":"' + date.value + '", "shopid":"' + sid.value + '", "product": "' + product.value + '", "quantity": "' + quantity.value + '","status": "' + status.value + '"}');
+            let obj = JSON.parse('{"Ino":"' + Ino.value + '", "amount":"' + amount.value + '", "chequeNo": "' + chequeNo.value + '", "status": "' + status.value + '", "customer": "' + customer.value + '"}');
             console.log(obj);
             ipcRenderer.send("my", obj)
 
@@ -57,28 +57,31 @@ export class addOrder extends HTMLElement {
             </style>
             
     
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()">Home</a>/Customer/Add Order</p>
-        <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 550px; margin-left: 300px;">
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()">Home</a>/Add Payment</p>
+        <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 600px; margin-left: 300px;">
             <img src="images/icons8-fast-moving-consumer-goods-100.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
-            <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);"> Date</h5>
             
-            <input type="text" id="date" name="date"><br>
+            
            
-            <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Shop Id</h5>
+            <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Invoic No</h5>
             
-            <input type="text" id="shopId" name="shopId"><br>
+            <input type="text" id="Ino" name="Ino"><br>
             
-            <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Product</h5>
+            <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Amount(RS)</h5>
             
-            <input type="text" id="product" name="product"><br>
+            <input type="text" id="amount" name="amount"><br>
             
-            <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Quantity</h5>
+            <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Cheque No</h5>
             
-            <input type="text" id="quantity" name="quantity"><br>
+            <input type="text" id="CNo" name="CNo"><br>
 
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Status</h5>
             
             <input type="text" id="status" name="status"><br>
+
+            <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Customer</h5>
+            
+            <input type="text" id="customer" name="customer"><br>
         </form>
         
         <button style="background-color:rgba(255, 68, 68, 1);margin-left: 490px;"><b>Cancel</b></button>
@@ -89,4 +92,4 @@ export class addOrder extends HTMLElement {
 
 }
 
-customElements.define('add-order', addOrder)
+customElements.define('add-payment', addPayment)

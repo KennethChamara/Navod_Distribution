@@ -27,9 +27,9 @@
             <a><img src="images\red_shoppictbasket_1484336512-1.png " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\micro-distribution-inventory-svg-png-icon-free-download-inventory-icon-flat-png-free-transparent-png-clipart-images-download.png " alt="
                 " style="width: 40px; height:40px; "></a>
-            <a><img src="images\icons8-name-tag-96.png " alt=" " style="width: 40px; height:40px; "></a>
+            <a onclick="addSalesRep()"><img src="images\icons8-name-tag-96.png " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\person-icon-red-14.jpg " alt=" " style="width: 40px; height:40px; "></a>
-            <a><img src="images\icons8-dollar-sign-64.png " alt=" " style="width: 40px; height:40px; "></a>
+            <a onclick="addPayment()"><img src="images\icons8-dollar-sign-64.png " alt=" " style="width: 40px; height:40px; "></a>
         </div>
 
         <!-- BurgerMenu -->
@@ -55,7 +55,7 @@
                 <div class="dropdown-container ">
 
 
-                    <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Product</a>
+                    <a onclick="addProduct()" class="text-reset " style="text-decoration: inherit;font-size:17px; ">Add Product</a>
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Sales Rep</a>
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Product</a>
 
@@ -64,10 +64,10 @@
                     " style="width: 40px; height:40px; ">
                     <p class="para " style="display: inline-block; margin:20px "> Inventory</p>
                 </a>
-                <a><img src="images\icons8-name-tag-96.png " alt=" " style="width: 40px; height:40px; ">
+                <a onclick="addSalesRep()"><img src="images\icons8-name-tag-96.png " alt=" " style="width: 40px; height:40px; ">
                     <p class="para " style="display: inline-block; margin:20px "> Sales Rep</p>
                 </a>
-                <button class="dropdown-btn " style="box-shadow: none; "><img src="images\analytics-circle-green-512.webp " alt=" " style="width: 40px; height:40px; ">
+                <button class="dropdown-btn " style="box-shadow: none; "><img src="images\person-icon-red-14.jpg " alt=" " style="width: 40px; height:40px; ">
                     <p style="display: inline-block; margin:20px "> Customer</p>
                     </button>
                 <div class="dropdown-container ">
@@ -78,7 +78,7 @@
                     <a class="text-reset " style="text-decoration: inherit;font-size:17px; ">Sales by Product</a>
 
                 </div>
-                <a><img src="images\icons8-dollar-sign-64.png " alt=" " style="width: 40px; height:40px; ">
+                <a onclick="addPayment()"><img src="images\icons8-dollar-sign-64.png " alt=" " style="width: 40px; height:40px; ">
                     <p class="para " style="display: inline-block; margin:20px "> Payment</p>
                 </a>
             </div>
@@ -134,8 +134,9 @@
             }
         }
 
+        // adding function
         function addCustomer() {
-            document.getElementById("main-body").innerHTML = "<test-one></test-one>";
+            document.getElementById("main-body").innerHTML = "<add-customer></add-customer>";
             document.getElementById("myLinks").style.display = "none";
         }
 
@@ -143,6 +144,27 @@
             document.getElementById("main-body").innerHTML = "<add-order></add-order>";
             document.getElementById("myLinks").style.display = "none";
         }
+
+        function first() {
+            document.getElementById("main-body").innerHTML = "<test-zero></test-zero>";
+            document.getElementById("myLinks").style.display = "none";
+        }
+
+        function addPayment() {
+            document.getElementById("main-body").innerHTML = "<add-payment></add-payment>";
+            document.getElementById("myLinks").style.display = "none";
+        }
+
+        function addProduct() {
+            document.getElementById("main-body").innerHTML = "<add-product></add-product>";
+            document.getElementById("myLinks").style.display = "none";
+        }
+
+        function addSalesRep() {
+            document.getElementById("main-body").innerHTML = "<add-sales-rep></add-sales-rep>";
+            document.getElementById("myLinks").style.display = "none";
+        }
+        //adding function close
     </script>
     <script>
         /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
