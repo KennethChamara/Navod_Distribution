@@ -21,7 +21,7 @@ export class addCustomer extends HTMLElement {
 
             let obj = JSON.parse('{"fname":"' + fn.value + '", "lname":"' + ln.value + '", "contactNo": "' + cn.value + '", "route": "' + r.value + '"}');
             console.log(obj);
-            ipcRenderer.send("my", obj)
+            ipcRenderer.send("addCustomer", obj)
 
         })
 

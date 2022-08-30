@@ -21,7 +21,7 @@ export class addProduct extends HTMLElement {
 
             let obj = JSON.parse('{"name":"' + name.value + '", "price":"' + price.value + '", "category": "' + category.value + '"}');
             console.log(obj);
-            ipcRenderer.send("my", obj)
+            ipcRenderer.send("addProduct", obj)
 
         })
 

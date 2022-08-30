@@ -22,7 +22,7 @@ export class addOrder extends HTMLElement {
 
             let obj = JSON.parse('{"date":"' + date.value + '", "shopid":"' + sid.value + '", "product": "' + product.value + '", "quantity": "' + quantity.value + '","status": "' + status.value + '"}');
             console.log(obj);
-            ipcRenderer.send("my", obj)
+            ipcRenderer.send("addOrder", obj)
 
         })
 

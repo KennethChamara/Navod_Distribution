@@ -16,6 +16,25 @@ function createWindow() {
 
 app.whenReady().then(createWindow)
 
-ipcMain.on("my", (event, obj) => {
+ipcMain.on("addCustomer", (event, obj) => {
+    console.log(obj);
+})
+
+ipcMain.on("addOrder", (event, obj) => {
+    console.log(obj);
+})
+
+
+ipcMain.on("addPayment", (event, obj) => {
+    console.log(obj);
+})
+
+
+ipcMain.on("addProduct", (event, obj) => {
+    console.log(obj);
+})
+
+
+ipcMain.on("addSalesRep", (event, obj) => {
     console.log(obj);
 })

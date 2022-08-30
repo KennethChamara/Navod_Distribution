@@ -16,13 +16,13 @@ export class addPayment extends HTMLElement {
         submit.addEventListener('click', () => {
             const Ino = this.shadowRoot.querySelector('#Ino');
             const amount = this.shadowRoot.querySelector('#amount');
-            const chequeNo = this.shadowRoot.querySelector('#chequeNo');
+            const chequeNo = this.shadowRoot.querySelector('#CNo');
             const status = this.shadowRoot.querySelector('#status');
             const customer = this.shadowRoot.querySelector('#customer');
 
             let obj = JSON.parse('{"Ino":"' + Ino.value + '", "amount":"' + amount.value + '", "chequeNo": "' + chequeNo.value + '", "status": "' + status.value + '", "customer": "' + customer.value + '"}');
             console.log(obj);
-            ipcRenderer.send("my", obj)
+            ipcRenderer.send("addPayment", obj)
 
         })
 

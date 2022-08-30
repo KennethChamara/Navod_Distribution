@@ -14,14 +14,14 @@ export class addSalesRep extends HTMLElement {
         this.render()
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
-            const repId = this.shadowRoot.querySelector('#repId');
+            const repId = this.shadowRoot.querySelector('#Rid');
             const name = this.shadowRoot.querySelector('#name');
             const adress = this.shadowRoot.querySelector('#adress');
             const contact = this.shadowRoot.querySelector('#contact');
 
-            let obj = JSON.parse('{"reId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
+            let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
             console.log(obj);
-            ipcRenderer.send("my", obj)
+            ipcRenderer.send("addSalesRep", obj)
 
         })
 
