@@ -49,7 +49,7 @@ export class addOrder extends HTMLElement {
                 height:40px;  
                 border:none; 
                 margin-top: 20px; 
-               
+                cursor: pointer;
                 padding: 3px; 
 
             }
@@ -57,7 +57,7 @@ export class addOrder extends HTMLElement {
             </style>
             
     
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()">Home</a>/Customer/Add Order</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Customer/Add Order</p>
         <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 550px; margin-left: 300px;">
             <img src="images/icons8-fast-moving-consumer-goods-100.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
             <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);"> Date</h5>
