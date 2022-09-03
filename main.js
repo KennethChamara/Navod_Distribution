@@ -38,3 +38,9 @@ ipcMain.on("addProduct", (event, obj) => {
 ipcMain.on("addSalesRep", (event, obj) => {
     console.log(obj);
 })
+
+ipcMain.on('helloSync', (event, args) => {
+    //do something with args
+    console.log(args)
+    event.returnValue = 'Hi, sync reply';
+});

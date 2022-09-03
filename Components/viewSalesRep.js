@@ -85,18 +85,18 @@ export class viewSalesRep extends HTMLElement {
             </style>
             
     
-           
+            <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
                 <br>
 
         <div class="tbl">
             <table>
             <tr>
                 <th></th>
-                <th>Item</th>
-                <th>Order ID</th>
-                <th>Price(Rs)</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th>Rep Id</th>
+                <th>Sales Rep</th>
+                <th>Contact No</th>
+                <th>Adress</th>
+                
             </tr>
 
             <tr>
@@ -107,7 +107,6 @@ export class viewSalesRep extends HTMLElement {
                 <td>Griffin</td>
                 <td>Griffin</td>
                 <td>Griffin</td>
-                <td>$100</td>
             </tr>
 
         </table>

@@ -85,18 +85,17 @@ export class viewProduct extends HTMLElement {
             </style>
             
     
-           
-                <br>
+            <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/View Product</p>
+                
 
         <div class="tbl">
             <table>
             <tr>
                 <th></th>
-                <th>Item</th>
-                <th>Order ID</th>
-                <th>Price(Rs)</th>
+                <th>Name</th>
+                <th>Price</th>
                 <th>Category</th>
-                <th>Quantity</th>
+                
             </tr>
 
             <tr>
@@ -106,8 +105,7 @@ export class viewProduct extends HTMLElement {
                 <td>Peter</td>
                 <td>Griffin</td>
                 <td>Griffin</td>
-                <td>Griffin</td>
-                <td>$100</td>
+                
             </tr>
 
         </table>

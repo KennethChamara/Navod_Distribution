@@ -12,18 +12,9 @@ export class returnItem extends HTMLElement {
     connectedCallback() {
 
         this.render()
-        const submit = this.shadowRoot.querySelector('#save');
-        submit.addEventListener('click', () => {
-            const repId = this.shadowRoot.querySelector('#Rid');
-            const name = this.shadowRoot.querySelector('#name');
-            const adress = this.shadowRoot.querySelector('#adress');
-            const contact = this.shadowRoot.querySelector('#contact');
-
-            let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("InventoryManagement", obj)
-
-        })
+        console.log("janitha")
+        let reply = ipcRenderer.sendSync('helloSync', 'a string');
+        console.log(reply)
 
     }
 
@@ -93,10 +84,12 @@ export class returnItem extends HTMLElement {
             <tr>
                 <th></th>
                 <th>Item</th>
-                <th>Order ID</th>
-                <th>Price(Rs)</th>
-                <th>Category</th>
+                <th>Customer Name</th>
+                <th>Date</th>
+                <th>Mfc_Date</th>
+                <th>Exp_Date</th>
                 <th>Quantity</th>
+                <th>Description</th>
             </tr>
 
             <tr>
@@ -107,6 +100,8 @@ export class returnItem extends HTMLElement {
                 <td>Griffin</td>
                 <td>Griffin</td>
                 <td>Griffin</td>
+                <td>$100</td>
+                <td>$100</td>
                 <td>$100</td>
             </tr>
 

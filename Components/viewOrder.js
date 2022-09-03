@@ -92,11 +92,12 @@ export class viewOrder extends HTMLElement {
             <table>
             <tr>
                 <th></th>
-                <th>Item</th>
-                <th>Order ID</th>
-                <th>Price(Rs)</th>
-                <th>Category</th>
+                <th>Date</th>
+                <th>Order Id</th>
+                <th>Shop Id</th>
+                <th>Product</th>
                 <th>Quantity</th>
+                <th>Status</th>
             </tr>
 
             <tr>
@@ -107,6 +108,7 @@ export class viewOrder extends HTMLElement {
                 <td>Griffin</td>
                 <td>Griffin</td>
                 <td>Griffin</td>
+                <td>$100</td>
                 <td>$100</td>
             </tr>
 
