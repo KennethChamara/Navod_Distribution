@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+
 export class returnItem extends HTMLElement {
     constructor() {
         super();
@@ -9,111 +10,93 @@ export class returnItem extends HTMLElement {
 
     }
 
-    connectedCallback() {
 
-        this.render()
-        console.log("janitha")
+
+    connectedCallback() {
         let reply = ipcRenderer.sendSync('helloSync', 'a string');
-        console.log(reply)
+        console.log(reply[0].name)
+        const na = reply;
+
+
+        this.render(reply)
+        const table = this.shadowRoot.querySelector('#jana');
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
+
+
+            row.insertCell(0).innerHTML = reply[i].name;
+            row.insertCell(1).innerHTML = reply[i].phone;
+            row.insertCell(2).innerHTML = reply[i].address;
+            row.insertCell(3).innerHTML = reply[i].route;
+            row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+
+
+            const dele = this.shadowRoot.querySelector('#del' + i);
+            dele.addEventListener('click', () => {
+
+
+                ipcRenderer.send("returnItem", reply[i].customer_id)
+
+            })
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
-    render() {
-        this.shadowRoot.innerHTML = `
-        <style> 
-        .txt1[type=text] {
-            border: none;
-            border-bottom: 1px solid grey;
-            font-size: 25px;
-            color: gray;
-        }
-        
-        .txt2[type=text] {
-            background-color: #FAEED2;
-            height: 25px;
-            
-            border: 2px solid rgba(0, 0, 0, 0.281);
-        }
-      
-          input[type=checkbox] {
-            width: 30px;
-            height: 20px;
-            padding: 2px 13px;
-            display: inline;
-            border-radius: 8px;
-            border: 2px solid rgba(0, 0, 0, 0.281);
-           
-        }
-        
-        .tbl {
-            background-color: rgba(255, 255, 255, 1);
-            width: 1190px;
-            margin-top: 20px;
-            height: auto;
-            margin-left:-90px;
-            padding: 30px;
-            padding-top: 80px;
-        }
-        
-        table {
-            margin-top: 100px;
-            margin: 20px;
-            border-collapse: collapse;
-            width: 95%;
-        }
-        
-        th,
-        td {
-            padding: 20px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            color: grey;
-        }
-            
-            </style>
-            
+
+
+
+
+
+    render(row) {
+
+        this.shadowRoot.innerHTML += `
+        <link rel="stylesheet" href="Components/table.css">           
     
            
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
                 <br>
 
         <div class="tbl">
-            <table>
+            <table id="jana">
             <tr>
+                
+                <th>Rep Id</th>
+                <th>Sales Rep</th>
+                <th>Contact No</th>
+                <th>Adress</th>
                 <th></th>
-                <th>Item</th>
-                <th>Customer Name</th>
-                <th>Date</th>
-                <th>Mfc_Date</th>
-                <th>Exp_Date</th>
-                <th>Quantity</th>
-                <th>Description</th>
+                
             </tr>
 
-            <tr>
-                <form>
-                    <td><input type="checkbox" id="vehicle" name="vehicle1" value="Bike"></td>
-                </form>
-                <td>Peter</td>
-                <td>Griffin</td>
-                <td>Griffin</td>
-                <td>Griffin</td>
-                <td>$100</td>
-                <td>$100</td>
-                <td>$100</td>
-            </tr>
-
+           
         </table>
         <button style="margin-left: 40px;"><</button><button>></button>
+
+        
 
 
     </div>
     <br><br>
               
     
-                `;
+            `;
 
     }
 
