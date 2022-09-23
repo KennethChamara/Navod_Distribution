@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-export class AvailableItem extends HTMLElement {
+export class viewCustomer extends HTMLElement {
     constructor() {
         super();
 
@@ -10,7 +10,7 @@ export class AvailableItem extends HTMLElement {
     }
 
     connectedCallback() {
-        let reply = ipcRenderer.sendSync('availableItem', 'a string');
+        let reply = ipcRenderer.sendSync('viewCustomer', 'a string');
         console.log(reply[0].name)
         const na = reply;
 
@@ -24,10 +24,30 @@ export class AvailableItem extends HTMLElement {
             const row = table.insertRow(i + 1);
 
 
-            row.insertCell(0).innerHTML = reply[i].pname;
-            row.insertCell(1).innerHTML = reply[i].price;
-            row.insertCell(2).innerHTML = reply[i].category;
-            row.insertCell(3).innerHTML = reply[i].quantity;
+            row.insertCell(0).innerHTML = reply[i].name;
+            row.insertCell(1).innerHTML = reply[i].phone;
+            row.insertCell(2).innerHTML = reply[i].address;
+            row.insertCell(3).innerHTML = reply[i].route;
+            row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+
+            const dele = this.shadowRoot.querySelector('#del' + i);
+            dele.addEventListener('click', () => {
+                const tb = this.shadowRoot.querySelector('#tb');
+
+
+                ipcRenderer.send("deleteCustomer", reply[i].customer_id)
+                tb.remove()
+
+                this.connectedCallback()
+
+
+
+
+            })
+
+
+
+
 
 
         }
@@ -71,15 +91,17 @@ export class AvailableItem extends HTMLElement {
             <table id="jana">
             <tr>
                 
-                <th>Item</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th>Customer</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Route</th>
+                <th></th>
                 
             </tr>
 
            
         </table>
+        <button style="margin-left: 40px;"><</button><button>></button>
 
         
 
@@ -95,4 +117,4 @@ export class AvailableItem extends HTMLElement {
 
 }
 
-customElements.define('available-item', AvailableItem)
+customElements.define('view-customer', viewCustomer)

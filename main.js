@@ -103,3 +103,188 @@ ipcMain.on('returnItem', (event, id) => {
     console.log(id)
 
 })
+
+
+//available item
+
+ipcMain.on('availableItem', (event, args) => {
+    var sql = "select (i.quantity - o.quantity) as quantity,p.pname,p.price from order_product as o,inventory as i,product as p where o.p_id=i.p_id and p.p_id=o.p_id";
+    connection.query(sql, function(err, rows, fields) {
+
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+
+//Inventory Management
+
+ipcMain.on('im', (event, args) => {
+    var sql = "select p.pname,p.price,p.category,i.quantity,i.p_id,i.s_id from navode.inventory as i,product as p where p.p_id=i.p_id";
+    connection.query(sql, function(err, rows, fields) {
+
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on('imdelete', (event, id) => {
+
+    var sql = "DELETE FROM navode.inventory WHERE s_id =" + id.s_id + "and p_id =" + id.p_id;
+    connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("Number of records deleted: " + result.affectedRows);
+    });
+    console.log(id.s_id)
+
+})
+
+
+
+
+//select item in product table
+
+
+ipcMain.on('inProduct', (event, args) => {
+    var sql = "select * from navode.product";
+    connection.query(sql, function(err, rows, fields) {
+
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+//view order
+ipcMain.on('viewOrder', (event, args) => {
+    var sql = "select * from navode.order";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on('deleteOrder', (event, id) => {
+
+        var sql = "DELETE FROM navode.order WHERE o_id =" + id;
+        connection.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log("Number of records deleted: " + result.affectedRows);
+        });
+        console.log(id)
+
+    })
+    //view Product
+ipcMain.on('viewProduct', (event, args) => {
+    var sql = "select * from navode.product";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on('deleteProduct', (event, id) => {
+
+        var sql = "DELETE FROM navode.product WHERE p_id =" + id;
+        connection.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log("Number of records deleted: " + result.affectedRows);
+        });
+        console.log(id)
+
+    })
+    //view sales rep
+ipcMain.on('viewSalesRep', (event, args) => {
+    var sql = "select * from navode.rep";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on('deleteSalesRep', (event, id) => {
+
+        var sql = "DELETE FROM navode.rep WHERE rep_id =" + id;
+        connection.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log("Number of records deleted: " + result.affectedRows);
+        });
+        console.log(id)
+
+    })
+    //view customer
+ipcMain.on('viewCustomer', (event, args) => {
+    var sql = "select * from navode.customer_shop";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on('deleteCustomer', (event, id) => {
+
+    var sql = "DELETE FROM navode.customer_shop WHERE customer_id =" + id;
+    connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("Number of records deleted: " + result.affectedRows);
+    });
+    console.log(id)
+
+})
+
+
+
+
+//return Iteam 
+ipcMain.on('returnIteams', (event, args) => {
+    var sql = "";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});

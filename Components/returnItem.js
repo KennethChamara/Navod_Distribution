@@ -94,10 +94,12 @@ export class returnItem extends HTMLElement {
             <table id="jana">
             <tr>
                 
-                <th>Rep Id</th>
-                <th>Sales Rep</th>
-                <th>Contact No</th>
-                <th>Adress</th>
+                <th>Item</th>
+                <th>Customer_Name</th>
+                <th>Date</th>
+                <th>Mfc_Date</th>
+                <th>Quantity</th>
+                <th>Description</th>
                 <th></th>
                 
             </tr>

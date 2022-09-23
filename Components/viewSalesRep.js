@@ -10,117 +10,110 @@ export class viewSalesRep extends HTMLElement {
     }
 
     connectedCallback() {
+        let reply = ipcRenderer.sendSync('viewSalesRep', 'a string');
+        console.log(reply[0].name)
+        const na = reply;
+
+
+
 
         this.render()
-        const submit = this.shadowRoot.querySelector('#save');
-        submit.addEventListener('click', () => {
-            const repId = this.shadowRoot.querySelector('#Rid');
-            const name = this.shadowRoot.querySelector('#name');
-            const adress = this.shadowRoot.querySelector('#adress');
-            const contact = this.shadowRoot.querySelector('#contact');
+        const table = this.shadowRoot.querySelector('#jana');
 
-            let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("InventoryManagement", obj)
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
 
-        })
+
+            row.insertCell(0).innerHTML = reply[i].rep_id;
+            row.insertCell(1).innerHTML = reply[i].name;
+            row.insertCell(2).innerHTML = reply[i].phone;
+            row.insertCell(3).innerHTML = reply[i].address;
+            row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+
+            const dele = this.shadowRoot.querySelector('#del' + i);
+            dele.addEventListener('click', () => {
+                const tb = this.shadowRoot.querySelector('#tb');
+
+
+                ipcRenderer.send("deleteSalesRep", reply[i].rep_id)
+                tb.remove()
+
+                this.connectedCallback()
+
+
+
+
+            })
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
-    render() {
-        this.shadowRoot.innerHTML = `
-        <style> 
-        .txt1[type=text] {
-            border: none;
-            border-bottom: 1px solid grey;
-            font-size: 25px;
-            color: gray;
-        }
-        
-        .txt2[type=text] {
-            background-color: #FAEED2;
-            height: 25px;
-            
-            border: 2px solid rgba(0, 0, 0, 0.281);
-        }
-      
-          input[type=checkbox] {
-            width: 30px;
-            height: 20px;
-            padding: 2px 13px;
-            display: inline;
-            border-radius: 8px;
-            border: 2px solid rgba(0, 0, 0, 0.281);
-           
-        }
-        
-        .tbl {
-            background-color: rgba(255, 255, 255, 1);
-            width: 1190px;
-            margin-top: 20px;
-            height: auto;
-            margin-left:-90px;
-            padding: 30px;
-            padding-top: 80px;
-        }
-        
-        table {
-            margin-top: 100px;
-            margin: 20px;
-            border-collapse: collapse;
-            width: 95%;
-        }
-        
-        th,
-        td {
-            padding: 20px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            color: grey;
-        }
-            
-            </style>
-            
-    
-            <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
-                <br>
 
-        <div class="tbl">
-            <table>
+
+
+
+
+    render() {
+
+        this.shadowRoot.innerHTML += `
+        <link rel="stylesheet" href="Components/table.css">           
+    
+           
+        
+     <div id="tb">
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <br>  
+
+        <div class="tbl" id="tb">
+       
+
+            
+            <table id="jana">
             <tr>
-                <th></th>
+                
                 <th>Rep Id</th>
                 <th>Sales Rep</th>
                 <th>Contact No</th>
-                <th>Adress</th>
+                <th>Address</th>
+                <th></th>
                 
             </tr>
 
-            <tr>
-                <form>
-                    <td><input type="checkbox" id="vehicle" name="vehicle1" value="Bike"></td>
-                </form>
-                <td>Peter</td>
-                <td>Griffin</td>
-                <td>Griffin</td>
-                <td>Griffin</td>
-            </tr>
-
+           
         </table>
         <button style="margin-left: 40px;"><</button><button>></button>
+
+        
 
 
     </div>
     <br><br>
+    </div>
               
     
-                `;
+            `;
 
     }
-
 
 }
 
