@@ -64,3 +64,9 @@ function viewProduct() {
     document.getElementById("main-body").innerHTML = "<view-product></view-product>";
     document.getElementById("myLinks").style.display = "none";
 }
+
+
+function addInventory() {
+    document.getElementById("main-body").innerHTML = "<add-inventory></add-inventory>";
+    document.getElementById("myLinks").style.display = "none";
+}
