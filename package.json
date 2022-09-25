@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KennethChamara/Navod_Distribution#readme",
   "dependencies": {
+    "chart.js": "^3.9.1",
     "electron": "^20.0.1",
     "mysql": "^2.18.1"
   }
