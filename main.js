@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '', // or the original password : 'apaswword'
+    password: '12345', // or the original password : 'apaswword'
     database: 'navode'
 });
 

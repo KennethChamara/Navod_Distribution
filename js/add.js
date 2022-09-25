@@ -71,7 +71,12 @@ function addInventory() {
     document.getElementById("myLinks").style.display = "none";
 }
 
-function loadRepDashboard() {
-    document.getElementById("main-body").innerHTML = "<rep-dashboard></rep-dashboard>";
+function loadRepProductAnalysis() {
+    document.getElementById("main-body").innerHTML = "<product-analysis></product-analysis>";
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function loadRepProgress() {
+    document.getElementById("main-body").innerHTML = '<rep-progress val="29"></rep-progress>';
     document.getElementById("myLinks").style.display = "none";
 }
