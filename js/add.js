@@ -70,3 +70,9 @@ function addInventory() {
     document.getElementById("main-body").innerHTML = "<add-inventory></add-inventory>";
     document.getElementById("myLinks").style.display = "none";
 }
+
+
+function repAnalysis() {
+    document.getElementById("main-body").innerHTML = "<rep-analysis></rep-analysis>";
+    document.getElementById("myLinks").style.display = "none";
+}

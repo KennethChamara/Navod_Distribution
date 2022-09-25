@@ -11,3 +11,4 @@ import { viewSalesRep } from './viewSalesRep.js';
 import { viewOrder } from './viewOrder.js';
 import { viewProduct } from './viewProduct.js';
 import { addInventory } from './addInventory.js';
+import { repAnalysis } from './repAnalysis.js';
