@@ -1,32 +1,33 @@
 const { ipcRenderer } = require("electron");
 
 export class Progress extends HTMLElement {
-  constructor() {
-    super();
-    var el;
-    var options;
-    var canvas;
-    var span;
-    var ctx;
-    var radius;
-    const shadowRoot = this.attachShadow({
-      mode: "open",
-    });
-  }
+    constructor() {
+        super();
+        var el;
+        var options;
+        var canvas;
+        var span;
+        var ctx;
+        var radius;
+        const shadowRoot = this.attachShadow({
+            mode: "open",
+        });
+    }
 
-  connectedCallback() {
+    connectedCallback() {
 
-    this.render();
+        this.render();
 
-    this.drawNewGraph('graph1');   
+        this.drawNewGraph('graph1');
 
-  }
+    }
 
-  render() {
-    this.shadowRoot.innerHTML += `
+    render() {
+        this.shadowRoot.innerHTML += `
             <style>
                 .row{
-                    padding-top: 50px;
+                    padding-top: 85px;
+                    padding-left: 85px;
                     font-family: 'Titillium web';
                     font-weight: 400 ;
                 }
@@ -63,24 +64,24 @@ export class Progress extends HTMLElement {
             <div class="container">
             <div class="row">
             
-                <div class="chart" id="graph1" data-percent="`+this.getAttribute('val')+`" data-color="#30bae7">
+                <div class="chart" id="graph1" data-percent="` + this.getAttribute('val') + `" data-color="#30bae7">
                 </div>
                 
             </div>
 
     
             `;
-  }
+    }
 
 
-    createCanvasVariable(id){  // get canvas
+    createCanvasVariable(id) { // get canvas
         this.el = this.shadowRoot.getElementById(id);
         console.log(this.el);
     };
 
-    createAllVariables(){
+    createAllVariables() {
         this.options = {
-            percent:  this.el.getAttribute('data-percent') || 25,
+            percent: this.el.getAttribute('data-percent') || 25,
             size: this.el.getAttribute('data-size') || 165,
             lineWidth: this.el.getAttribute('data-line') || 15,
             rotate: this.el.getAttribute('data-rotate') || 0,
@@ -118,7 +119,7 @@ export class Progress extends HTMLElement {
         this.ctx.stroke();
     };
 
-    drawNewGraph(id){
+    drawNewGraph(id) {
         this.el = this.shadowRoot.getElementById(id);
         this.createAllVariables();
         this.drawCircle('#efefef', this.options.lineWidth, 100 / 100);

@@ -4,17 +4,19 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '12345', // or the original password : 'apaswword'
+    password: '', // or the original password : 'apaswword'
     database: 'navode'
 });
 
 connection.connect(function(err) {
     // in case of error
     if (err) {
+
         console.log(err.code);
         console.log(err.fatal);
     }
 });
+console.log("jana");
 
 function createWindow() {
     const win = new BrowserWindow({

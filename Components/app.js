@@ -12,4 +12,7 @@ import { viewOrder } from './viewOrder.js';
 import { viewProduct } from './viewProduct.js';
 import { addInventory } from './addInventory.js';
 import { Progress } from './progress.js';
-import { ProductAnalysis } from './productAnalysis.js';
+import { doughnut } from './doughnut.js';
+import { repAnalysis } from './repAnalysis.js';
+import { productAnalysis } from './productAnalysis.js';
+import { barChart } from './barChart.js';
