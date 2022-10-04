@@ -72,11 +72,16 @@ function addInventory() {
 }
 
 function loadRepProductAnalysis() {
-    document.getElementById("main-body").innerHTML = "<product-analysis></product-analysis>";
+    document.getElementById("main-body").innerHTML = "<product-progress></product-progress>";
     document.getElementById("myLinks").style.display = "none";
 }
 
 function loadRepProgress() {
-    document.getElementById("main-body").innerHTML = '<rep-progress val="29"></rep-progress>';
+    document.getElementById("main-body").innerHTML = '<rep-analysis></rep-analysis>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function ProductAnalysis() {
+    document.getElementById("main-body").innerHTML = '<product-analysis></product-analysis>';
     document.getElementById("myLinks").style.display = "none";
 }
