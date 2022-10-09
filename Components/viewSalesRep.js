@@ -29,6 +29,8 @@ export class viewSalesRep extends HTMLElement {
             row.insertCell(2).innerHTML = reply[i].phone;
             row.insertCell(3).innerHTML = reply[i].address;
             row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+            row.insertCell(5).innerHTML = `<a onclick='updaterep(${reply[i].rep_id})'><img src='images/pencil.png'></a>`;
+       
 
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
