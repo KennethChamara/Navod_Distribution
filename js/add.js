@@ -65,6 +65,10 @@ function viewProduct() {
     document.getElementById("myLinks").style.display = "none";
 }
 
+function viewCustomer() {
+    document.getElementById("main-body").innerHTML = "<view-customer></view-customer>";
+    document.getElementById("myLinks").style.display = "none";
+}
 
 function addInventory() {
     document.getElementById("main-body").innerHTML = "<add-inventory></add-inventory>";
@@ -78,5 +82,21 @@ function loadRepProductAnalysis() {
 
 function loadRepProgress() {
     document.getElementById("main-body").innerHTML = '<rep-progress val="29"></rep-progress>';
+    document.getElementById("myLinks").style.display = "none";
+}
+function updateproduct(p_id) {
+    document.getElementById("main-body").innerHTML = "<update-product p_id=${p_id}></update-product>";
+    document.getElementById("myLinks").style.display = "none";
+}
+function updatecustomer(customer_id) {
+    document.getElementById("main-body").innerHTML = "<update-customer customer_id=${customer_id}></update-customer>";
+    document.getElementById("myLinks").style.display = "none";
+}
+function updateorder(o_id) {
+    document.getElementById("main-body").innerHTML = "<update-order o_id=${o_id}></update-order>";
+    document.getElementById("myLinks").style.display = "none";
+}
+function updaterep(rep_id) {
+    document.getElementById("main-body").innerHTML = "<update-rep rep_id=${rep_id}></update-rep>";
     document.getElementById("myLinks").style.display = "none";
 }
