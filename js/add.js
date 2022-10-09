@@ -70,3 +70,38 @@ function addInventory() {
     document.getElementById("main-body").innerHTML = "<add-inventory></add-inventory>";
     document.getElementById("myLinks").style.display = "none";
 }
+
+function loadRepProductAnalysis() {
+    document.getElementById("main-body").innerHTML = "<product-progress></product-progress>";
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function loadRepProgress() {
+    document.getElementById("main-body").innerHTML = '<rep-analysis></rep-analysis>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function ProductAnalysis() {
+    document.getElementById("main-body").innerHTML = '<product-analysis></product-analysis>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function returnReport() {
+    document.getElementById("main-body").innerHTML = '<return-report></return-report>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function Invoice() {
+    document.getElementById("main-body").innerHTML = '<invoice-report></invoice-report>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function salesReport() {
+    document.getElementById("main-body").innerHTML = '<sales-report></sales-report>';
+    document.getElementById("myLinks").style.display = "none";
+}
+
+function inventoryReport() {
+    document.getElementById("main-body").innerHTML = '<inventory-report></inventory-report>';
+    document.getElementById("myLinks").style.display = "none";
+}
