@@ -12,6 +12,7 @@ export class repAnalysis extends HTMLElement {
     connectedCallback() {
 
         this.render();
+        this.shadowRoot.querySelector('#repChart')
 
 
     }
@@ -30,7 +31,7 @@ export class repAnalysis extends HTMLElement {
             </div>
             <div class="col-8">
                 <div class="b1" style="padding:1%">
-                    <h3>Janitha</h3>
+                    <h3>2022</h3>
                     
                 </div>
             </div>
@@ -39,7 +40,7 @@ export class repAnalysis extends HTMLElement {
         <br>
         <div class="row">
             <div class="col-4">
-                <rep-progress val="89"></rep-progress>
+                <rep-progress id="repChart" val="89"></rep-progress>
             </div>
             <div class="col-8">
                 <div class="row">

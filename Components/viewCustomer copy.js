@@ -29,8 +29,8 @@ export class viewCustomer extends HTMLElement {
             row.insertCell(2).innerHTML = reply[i].address;
             row.insertCell(3).innerHTML = reply[i].route;
             row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(5).innerHTML = `<a onclick='updatecustomer(${reply[i].customer_id})'><img src='images/pencil.png'></a>`;
-       
+            row.insertCell(5).innerHTML = `<a onclick='updatecustomer(${reply[i].customer_id})'><img src='images/icons8-update-48.png' style="width:25%; height:25%;"></a>`;
+
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');

@@ -1,46 +1,49 @@
 const { ipcRenderer } = require("electron");
 
 export class returnItem extends HTMLElement {
-  constructor() {
-    super();
+    constructor() {
+        super();
 
-    const shadowRoot = this.attachShadow({
-      mode: "open",
-    });
-  }
-
-  connectedCallback() {
-    let reply = ipcRenderer.sendSync("helloSync", "a string");
-    console.log(reply[0].name);
-    const na = reply;
-
-    this.render();
-    const table = this.shadowRoot.querySelector("#jana");
-
-    for (let i = 0; i < reply.length; i++) {
-      const row = table.insertRow(i + 1);
-
-      row.insertCell(0).innerHTML = reply[i].name;
-      row.insertCell(1).innerHTML = reply[i].phone;
-      row.insertCell(2).innerHTML = reply[i].address;
-      row.insertCell(3).innerHTML = reply[i].route;
-      row.insertCell(4).innerHTML =
-        "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-
-      const dele = this.shadowRoot.querySelector("#del" + i);
-      dele.addEventListener("click", () => {
-        const tb = this.shadowRoot.querySelector("#tb");
-
-        ipcRenderer.send("returnItem", reply[i].customer_id);
-        tb.remove();
-
-        this.connectedCallback();
-      });
+        const shadowRoot = this.attachShadow({
+            mode: "open",
+        });
     }
-  }
 
-  render() {
-    this.shadowRoot.innerHTML += `
+    connectedCallback() {
+        let reply = ipcRenderer.sendSync("returnIteams", "a string");
+        console.log(reply[0].name);
+        const na = reply;
+
+        this.render();
+        const table = this.shadowRoot.querySelector("#jana");
+
+        for (let i = 0; i < reply.length; i++) {
+            let obj = JSON.parse('{"date":"' + reply[i].date + '", "c_id":"' + reply[i].customer_id + '", "p_id": "' + reply[i].p_id + '"}');
+            const row = table.insertRow(i + 1);
+
+            row.insertCell(0).innerHTML = reply[i].pname;
+            row.insertCell(1).innerHTML = reply[i].name;
+            row.insertCell(2).innerHTML = reply[i].date;
+            row.insertCell(3).innerHTML = reply[i].manufacture_date;
+            row.insertCell(4).innerHTML = reply[i].quantity;
+            row.insertCell(5).innerHTML = reply[i].description;
+            row.insertCell(6).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+            row.insertCell(7).innerHTML = `<a onclick='updatereturns(${reply[i].p_id},${reply[i].customer_id},${reply[i].date})'><img src='images/icons8-update-48.png' style="width:25%; height:25%;"></a>`;
+
+            const dele = this.shadowRoot.querySelector("#del" + i);
+            dele.addEventListener("click", () => {
+                const tb = this.shadowRoot.querySelector("#tb");
+
+                ipcRenderer.send("deleteReturn", obj);
+                tb.remove();
+
+                this.connectedCallback();
+            });
+        }
+    }
+
+    render() {
+        this.shadowRoot.innerHTML += `
         <link rel="stylesheet" href="Components/table.css">           
     
            
@@ -79,7 +82,7 @@ export class returnItem extends HTMLElement {
               
     
             `;
-  }
+    }
 }
 
 customElements.define("return-item", returnItem);
