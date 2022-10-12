@@ -11,7 +11,7 @@ export class updateproduct extends HTMLElement {
 
     connectedCallback() {
 
-        
+
         var upreply = ipcRenderer.sendSync('updateproduct', this.getAttribute("p_id"));
         this.render(upreply);
         console.log(upreply[0].pname);
@@ -23,7 +23,7 @@ export class updateproduct extends HTMLElement {
 
 
             let obj = JSON.parse('{"name":"' + name.value + '", "price":"' + price.value + '", "category": "' + category.value + '"}');
-            obj.id=upreply[0].p_id;
+            obj.id = upreply[0].p_id;
             console.log(obj.id);
             ipcRenderer.send("updateproductiteam", obj);
             document.getElementById("main-body").innerHTML = "<view-product></view-product>";
@@ -69,15 +69,15 @@ export class updateproduct extends HTMLElement {
            
             <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Name</h5>
             
-            <input type="text" id="name" name="name"; value="`+upreply[0].pname+`"><br>
+            <input type="text" id="name" name="name"; value="` + upreply[0].pname + `"><br>
             
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Price(RS)</h5>
             
-            <input type="text" id="price" name="price"; value="`+upreply[0].price+`"><br>
+            <input type="text" id="price" name="price"; value="` + upreply[0].price + `"><br>
             
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Category</h5>
             
-            <input type="text" id="category" name="category"; value="`+upreply[0].category+`"><br>
+            <input type="text" id="category" name="category"; value="` + upreply[0].category + `"><br>
 
             
         </form>

@@ -31,8 +31,8 @@ export class viewOrder extends HTMLElement {
             row.insertCell(4).innerHTML = reply[i].quantity;
             row.insertCell(5).innerHTML = reply[i].status;
             row.insertCell(6).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(7).innerHTML = `<a onclick='updateorder(${reply[i].o_id})'><img src='images/pencil.png'></a>`;
-       
+            row.insertCell(7).innerHTML = `<a onclick='updateorder(${reply[i].o_id})'><img src='images/icons8-update-48.png' style="width:25%; height:25%;"></a>`;
+
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');
