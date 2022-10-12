@@ -109,19 +109,29 @@ function inventoryReport() {
     document.getElementById("main-body").innerHTML = '<inventory-report></inventory-report>';
     document.getElementById("myLinks").style.display = "none";
 }
+
 function updateproduct(p_id) {
     document.getElementById("main-body").innerHTML = "<update-product p_id=${p_id}></update-product>";
     document.getElementById("myLinks").style.display = "none";
 }
+
 function updatecustomer(customer_id) {
     document.getElementById("main-body").innerHTML = "<update-customer customer_id=${customer_id}></update-customer>";
     document.getElementById("myLinks").style.display = "none";
 }
+
 function updateorder(o_id) {
     document.getElementById("main-body").innerHTML = "<update-order o_id=${o_id}></update-order>";
     document.getElementById("myLinks").style.display = "none";
 }
+
 function updaterep(rep_id) {
     document.getElementById("main-body").innerHTML = "<update-rep rep_id=${rep_id}></update-rep>";
+    document.getElementById("myLinks").style.display = "none";
+}
+
+
+function updatereturns(p_id, customer_id, date) {
+    document.getElementById("main-body").innerHTML = "<update-returns p_id=${p_id}, customer_id=${customer_id}, date=${date}></update-returns>";
     document.getElementById("myLinks").style.display = "none";
 }

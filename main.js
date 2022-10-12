@@ -95,16 +95,7 @@ ipcMain.on('helloSync', (event, args) => {
 
 
 
-ipcMain.on('returnItem', (event, id) => {
 
-    var sql = "DELETE FROM customer_shop WHERE customer_id =" + id;
-    connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log("Number of records deleted: " + result.affectedRows);
-    });
-    console.log(id)
-
-})
 
 
 //available item
@@ -144,7 +135,7 @@ ipcMain.on('im', (event, args) => {
 
 ipcMain.on('imdelete', (event, id) => {
 
-    var sql = "DELETE FROM navode.inventory WHERE s_id =" + id.s_id + "and p_id =" + id.p_id;
+    var sql = "DELETE FROM navode.inventory WHERE s_id =" + id.s_id + " and p_id =" + id.p_id;
     connection.query(sql, function(err, result) {
         if (err) throw err;
         console.log("Number of records deleted: " + result.affectedRows);
@@ -201,7 +192,7 @@ ipcMain.on('deleteOrder', (event, id) => {
     })
     //view Product
 ipcMain.on('viewProduct', (event, args) => {
-    var sql = "select * from navode.product";
+    var sql = "select * from navode.product ";
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record inserted");
@@ -280,7 +271,30 @@ ipcMain.on('deleteCustomer', (event, id) => {
 
 //return Iteam 
 ipcMain.on('returnIteams', (event, args) => {
-    var sql = "";
+    var sql = "select * from customer_shop as c,product as p,returns as r where c.customer_id=r.customer_id and p.p_id=r.p_id";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+ipcMain.on('deleteReturn', (event, id) => {
+    console.log(id.c_id)
+    var sql = "DELETE FROM navode.returns WHERE date='" + id.date + "' and customer_id=" + id.c_id + " and p_id =" + id.p_id;
+    connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("Number of records deleted: " + result.affectedRows);
+    });
+
+
+})
+ipcMain.on('updateReturns', (event, args) => {
+    var sql = "select * from retuns as r,customer_shop as c,product as p where p.p_id=r.p_id and date=date and c.customer_id=r.customer_id";
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record inserted");
@@ -290,6 +304,7 @@ ipcMain.on('returnIteams', (event, args) => {
 
     });
 });
+
 
 //update
 ipcMain.on('updateproduct', (event, args) => {
@@ -306,108 +321,121 @@ ipcMain.on('updateproduct', (event, args) => {
 
 ipcMain.on('updateproductiteam', (event, obj) => {
     console.log(obj.id);
-    var upsql = "UPDATE product SET price= '"+obj.price+"', pname= '"+obj.name+"',  category= '" + obj.category + "'  where p_id=" + obj.id;
-   
-     connection.query(upsql, function(err, result) {
-         if (err) throw err;
-         
-         console.log("1 record updated from product");
-     });
-    }); 
+    var upsql = "UPDATE product SET price= '" + obj.price + "', pname= '" + obj.name + "',  category= '" + obj.category + "'  where p_id=" + obj.id;
 
-    ipcMain.on('updatecustomer', (event, args) => {
-        var sql = "select * from navode.customer_shop  where customer_id=customer_id";
-        connection.query(sql, function(err, rows, fields) {
-            if (err) throw err;
-            console.log("1 record inserted");
-    
-            event.returnValue = rows;
-    
-    
-        });
-    }); 
+    connection.query(upsql, function(err, result) {
+        if (err) throw err;
 
-
-    ipcMain.on('updatecustomeriteam', (event, obj) => {
-        console.log("anna");
-        var upsql = "UPDATE navode.customer_shop SET  name='"+obj.fname+"',phone='"+obj.contactNo+"', route= '"+obj.route+"',  address= '" + obj.lname + "'  where customer_id=" + obj.id;
-       
-         connection.query(upsql, function(err, result) {
-             if (err) throw err;
-             
-             console.log("1 record updated from rep");
-         });
-        }); 
-    
-
-    ipcMain.on('updateorder', (event, args) => {
-        var sql = "select * from navode.order  where o_id=o_id";
-        connection.query(sql, function(err, rows, fields) {
-            if (err) throw err;
-            console.log("1 record inserted");
-    
-            event.returnValue = rows;
-    
-    
-        });
+        console.log("1 record updated from product");
     });
-    
-    ipcMain.on('updateorderiteam', (event, obj) => {
-        console.log(obj.id);
-        var upsql = "UPDATE navode.order SET date='"+obj.date+"' , shop_id='"+obj.shop_id+"', product= '"+obj.product+"',  status= '" + obj.status + "',  quantity= '" + obj.quantity + "'  where o_id=" + obj.id;
-       
-         connection.query(upsql, function(err, result) {
-             if (err) throw err;
-             
-             console.log("1 record updated from order");
-         });
-        }); 
+});
 
-        ipcMain.on('updaterep', (event, args) => {
-            var sql = "select * from navode.rep  where rep_id=rep_id";
-            connection.query(sql, function(err, rows, fields) {
-                if (err) throw err;
-                console.log("1 record inserted");
-        
-                event.returnValue = rows;
-        
-        
-            });
-        });      
+ipcMain.on('updatecustomer', (event, args) => {
+    var sql = "select * from navode.customer_shop  where customer_id=customer_id";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
 
-        ipcMain.on('updaterepiteam', (event, obj) => {
-            console.log(obj.id);
-            var upsql = "UPDATE navode.rep SET rep_id='"+obj.repId+"' , phone='"+obj.phone+"', address= '"+obj.address+"',  name= '" + obj.name + "'  where rep_id=" + obj.id;
-           
-             connection.query(upsql, function(err, result) {
-                 if (err) throw err;
-                 
-                 console.log("1 record updated from rep");
-             });
-            }); 
-
-            ipcMain.on('updatecustomer', (event, args) => {
-                var sql = "select * from navode.customer_shop  where customer_id=customer_id";
-                connection.query(sql, function(err, rows, fields) {
-                    if (err) throw err;
-                    console.log("1 record inserted");
-            
-                    event.returnValue = rows;
-            
-            
-                });
-            }); 
+        event.returnValue = rows;
 
 
-            ipcMain.on('updatecustomeriteam', (event, obj) => {
-                console.log("anna");
-                var upsql = "UPDATE navode.customer_shop SET  name='"+obj.fname+"',phone='"+obj.contactNo+"', route= '"+obj.route+"',  address= '" + obj.lname + "'  where customer_id=" + obj.id;
-               
-                 connection.query(upsql, function(err, result) {
-                     if (err) throw err;
-                     
-                     console.log("1 record updated from rep");
-                 });
-                }); 
-            
-            
+    });
+});
+
+
+ipcMain.on('updatecustomeriteam', (event, obj) => {
+    console.log("anna");
+    var upsql = "UPDATE navode.customer_shop SET  name='" + obj.fname + "',phone='" + obj.contactNo + "', route= '" + obj.route + "',  address= '" + obj.lname + "'  where customer_id=" + obj.id;
+
+    connection.query(upsql, function(err, result) {
+        if (err) throw err;
+
+        console.log("1 record updated from rep");
+    });
+});
+
+
+ipcMain.on('updateorder', (event, args) => {
+    var sql = "select * from navode.order  where o_id=o_id";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('updateorderiteam', (event, obj) => {
+    console.log(obj.id);
+    var upsql = "UPDATE navode.order SET date='" + obj.date + "' , shop_id='" + obj.shop_id + "', product= '" + obj.product + "',  status= '" + obj.status + "',  quantity= '" + obj.quantity + "'  where o_id=" + obj.id;
+
+    connection.query(upsql, function(err, result) {
+        if (err) throw err;
+
+        console.log("1 record updated from order");
+    });
+});
+
+ipcMain.on('updaterep', (event, args) => {
+    var sql = "select * from navode.rep  where rep_id=rep_id";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('updaterepiteam', (event, obj) => {
+    console.log(obj.id);
+    var upsql = "UPDATE navode.rep SET rep_id='" + obj.repId + "' , phone='" + obj.phone + "', address= '" + obj.address + "',  name= '" + obj.name + "'  where rep_id=" + obj.id;
+
+    connection.query(upsql, function(err, result) {
+        if (err) throw err;
+
+        console.log("1 record updated from rep");
+    });
+});
+
+ipcMain.on('updatecustomer', (event, args) => {
+    var sql = "select * from navode.customer_shop  where customer_id=customer_id";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+ipcMain.on('updatecustomeriteam', (event, obj) => {
+    console.log("anna");
+    var upsql = "UPDATE navode.customer_shop SET  name='" + obj.fname + "',phone='" + obj.contactNo + "', route= '" + obj.route + "',  address= '" + obj.lname + "'  where customer_id=" + obj.id;
+
+    connection.query(upsql, function(err, result) {
+        if (err) throw err;
+
+        console.log("1 record updated from rep");
+    });
+});
+
+
+
+//rep AnalysisipcMain.on('updatecustomer', (event, args) => {
+ipcMain.on('updatecustomer', (event, args) => {
+    var sql = "select * from navode.order as o,order_product as op,product as p where ";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});

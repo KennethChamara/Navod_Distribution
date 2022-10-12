@@ -11,7 +11,7 @@ export class viewProduct extends HTMLElement {
 
     connectedCallback() {
         let reply = ipcRenderer.sendSync('viewProduct', 'a string');
-      
+
         const na = reply;
 
 
@@ -28,8 +28,8 @@ export class viewProduct extends HTMLElement {
             row.insertCell(1).innerHTML = reply[i].price;
             row.insertCell(2).innerHTML = reply[i].category;
             row.insertCell(3).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(4).innerHTML = `<a onclick='updateproduct(${reply[i].p_id})'><img src='images/pencil.png'></a>`;
-       
+            row.insertCell(4).innerHTML = `<a onclick='updateproduct(${reply[i].p_id})'><img src='images/icons8-update-48.png' style="width:12%; height:12%;"></a>`;
+
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');

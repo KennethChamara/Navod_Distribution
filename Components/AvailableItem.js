@@ -11,7 +11,7 @@ export class AvailableItem extends HTMLElement {
 
     connectedCallback() {
         let reply = ipcRenderer.sendSync('availableItem', 'a string');
-        console.log(reply[0].name)
+
         const na = reply;
 
 
