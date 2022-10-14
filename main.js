@@ -354,6 +354,33 @@ ipcMain.on('updatecustomeriteam', (event, obj) => {
     });
 });
 
+ipcMain.on('updatereturns', (event, p_id, customer_id, date) => {
+
+    var sql = "select * from navode.returns where p_id=" + p_id + " and customer_id=" + customer_id + " and date=" + date;
+    console.log(sql);
+    connection.query(sql, function(err, rows) {
+        if (err) throw err;
+        console.log(rows.p_id);
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('selectcustomer', (event, customer_id) => {
+
+    var sql = "select * from navode.customer_shop where customer_id=" + customer_id;
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
 
 ipcMain.on('updateorder', (event, args) => {
     var sql = "select * from navode.order  where o_id=o_id";
@@ -428,11 +455,16 @@ ipcMain.on('updatecustomeriteam', (event, obj) => {
 
 
 //rep AnalysisipcMain.on('updatecustomer', (event, args) => {
-ipcMain.on('updatecustomer', (event, args) => {
-    var sql = "select * from navode.order as o,order_product as op,product as p where ";
+ipcMain.on('repAnalysis', (event, args) => {
+
+    var y = args.year;
+    var m = args.month;
+    console.log(y);
+    var sql = "select sum(op.quantity*p.price) as total_price from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) and date between '" + y + "-" + m + "-1' and '" + y + "-" + m + "-31'";
+    console.log(sql)
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
-        console.log("1 record inserted");
+        console.log("1 record");
 
         event.returnValue = rows;
 
