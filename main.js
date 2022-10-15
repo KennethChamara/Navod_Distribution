@@ -27,7 +27,7 @@ function createWindow() {
             contextIsolation: false
         }
     })
-    win.loadFile("index.html")
+    win.loadFile("home.html")
 }
 
 
@@ -438,4 +438,27 @@ ipcMain.on('updatecustomer', (event, args) => {
 
 
     });
+});
+
+ipcMain.on('logIn', (event, args) => {
+    // var sqlName = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
+    var sqlName = "select name from navode.user where name='"+args.user+"'";
+    connection.query(sqlName, function(err, row) {
+
+        if (err) throw err;
+       
+        let nameval= row;
+        if(row.length != 0){
+            let sqlPass = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
+            connection.query(sqlPass, function(err, rows) {
+
+                if (err) throw err;
+                // console.log("name a pass",rows[0].name??'',nameval[0].name);
+                event.returnValue = [true,rows[0]?.name!=undefined?true:false];
+            });
+        }else{
+                event.returnValue = [false,false]; //invalid user and pass
+        }
+    });
+    
 });

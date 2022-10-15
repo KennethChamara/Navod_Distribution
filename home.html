@@ -169,7 +169,7 @@
 
     <main style="margin-top: 58px; ">
         <div>
-            <button class="logout">LOGOUT</button>
+            <button class="logout" onclick="logOut()">LOGOUT</button>
             <div style="margin-top: 120px;">
             <div style="background-color: rgb(245, 224, 175); width:200px; height: 80px; padding: 15px; margin-left: 30px; margin-top: 80px;"><img src="images\analytics-circle-green-512.webp" style="width: 50px; height:50px; "><h5 style="display: inline; margin-left:20px;">Analysis</h5></div>
             <div style="background-color: rgb(245, 224, 175); width:200px; height: 80px; padding: 15px; margin-left: 400px; margin-top: -78px;"><img src="images\red_shoppictbasket_1484336512-1.png " alt=" "style="width: 50px; height:50px; "><h5 style="display: inline; margin-left:20px;">Products</h5></div>
@@ -221,5 +221,11 @@
 
 
 </body>
+<script>
+    const { app, BrowserWindow, ipcMain } = require("electron")
+    function logOut() {
+        window.location.replace("./auth.html");
+    }
+</script>
 
 </html>

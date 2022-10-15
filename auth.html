@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron</title>
+    <link rel="stylesheet" href="bootstrap-5.2.0-dist\css\bootstrap.css">
+    <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style1.css">
+    
+
+
+<style> 
+    .error{
+        border-color: #ff3860;
+    }
+</style>
+
+</head>
+
+<body style="background-color:#FAEED2">
+
+
+    <!--form layout-->
+    <div class="col-sm-4 m-3">
+       <div class="row">
+        <div class="col-sm-2 m-2"><h6>Name</h6></div>
+        <div class="col-sm-2 m-2"><input type="text" id="name" name="name"><br></div>
+       </div>
+       <div class="row">
+        <div class="col-sm-2 m-2"><h6>Password</h6></div>
+        <div class="col-sm-2 m-2"><input type="text" id="pass" name="pass"><br></div>
+        <p id="invalid"></p>
+       </div>
+        
+        <button class="btn btn-primary" type="submit" value="Submit" onclick="logIn()">LogIN</button>
+    </div>
+<!--form layout-->
+
+
+</body>
+<script src="auth.js"></script>
+
+</html>
