@@ -13,14 +13,24 @@ export class doughnut extends HTMLElement {
         this.render();
 
         const labels = [
-            'Kalkiri',
+
             'Butter',
-            'Ghee',
             'Cheese',
             'Milk',
-            'Curd',
+            'Kalkiri',
         ];
+        const year = this.getAttribute('val')[1] + this.getAttribute('val')[2] + this.getAttribute('val')[3] + this.getAttribute('val')[4];
+        if (this.getAttribute('val')[7] == ']') {
+            var month = this.getAttribute('val')[6]
+        } else {
+            var month = this.getAttribute('val')[6] + this.getAttribute('val')[7]
 
+        }
+
+
+        let obj = JSON.parse('{"month":"' + month + '", "year":"' + year + '"}');
+        let reply = ipcRenderer.sendSync('productAnalysis', obj);
+        console.log(reply)
         const data = {
             labels: labels,
             datasets: [{
@@ -30,11 +40,12 @@ export class doughnut extends HTMLElement {
                     '#EDE986',
                     '#E586ED',
                     '#8886ED',
-                    '#86ED9D',
-                    '#EDBE86'
+
                 ],
                 borderColor: 'white',
-                data: [0, 10, 5, 2, 20, 30, 45],
+
+                data: [reply[0].total, reply[1].total, reply[2].total],
+
             }]
         };
 
@@ -48,6 +59,7 @@ export class doughnut extends HTMLElement {
             this.shadowRoot.getElementById('myChart'),
             config
         );
+
 
 
     }
@@ -64,7 +76,7 @@ export class doughnut extends HTMLElement {
             <canvas id="myChart"></canvas>
         </div>
 
-        <button class="btn btn-primary"></button>
+        
     
             `;
     }

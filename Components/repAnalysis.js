@@ -9,10 +9,9 @@ export class repAnalysis extends HTMLElement {
         });
     }
 
-    connectedCallback() {
+    connectedCallback(p = 100, m = 'Month', y = 'Year') {
 
-        let pre
-        this.render(pre);
+        this.render(p, m, y);
 
 
         const click = this.shadowRoot.querySelector('#click');
@@ -20,7 +19,7 @@ export class repAnalysis extends HTMLElement {
 
         click.addEventListener('click', () => {
             const month = this.shadowRoot.querySelector('#month').value;
-            const year = this.shadowRoot.querySelector('#year');
+            const year = this.shadowRoot.querySelector('#year').value;
             let m = 0;
             switch (month) {
                 case 'January':
@@ -64,17 +63,18 @@ export class repAnalysis extends HTMLElement {
             }
 
             console.log(m, year.value)
-            let obj = JSON.parse('{"month":"' + m + '", "year":"' + year.value + '"}');
+            let obj = JSON.parse('{"month":"' + m + '", "year":"' + year + '"}');
 
 
 
             let reply = ipcRenderer.sendSync('repAnalysis', obj);
             console.log(reply[0].total_price)
-            pre = Math.round((reply[0].total_price / 15000) * 100);
-            const p = 15;
-            console.log(p)
+            let pre = Math.round((reply[0].total_price / 15000) * 100);
+            const container = this.shadowRoot.querySelector('.container');
 
-            this.connectedCallback();
+            console.log(p)
+            container.remove()
+            this.connectedCallback(pre, month, year)
 
 
 
@@ -84,7 +84,8 @@ export class repAnalysis extends HTMLElement {
 
     }
 
-    render(pre) {
+    render(pre, m, y) {
+
         this.shadowRoot.innerHTML += `
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
@@ -94,7 +95,7 @@ export class repAnalysis extends HTMLElement {
         <div class="row">
             <div class="col-4">
                 <div class="" style="padding:2%">
-                <input list="browsers" name="month" id="month" >
+                <input list="browsers" name="month" id="month" value=` + m + ` >
                 <datalist id="browsers">
                   <option value="January">
                   <option value="February">
@@ -114,7 +115,7 @@ export class repAnalysis extends HTMLElement {
             </div>
             <div class="col-6">
                 <div class="" style="padding:1%">
-                <input list="browsers1" name="year" id="year" style="width:100%">
+                <input list="browsers1" name="year" id="year" style="width:100%" value=` + y + `>
                 <datalist id="browsers1">
                 <option value="2018">
                 <option value="2019">
@@ -133,6 +134,7 @@ export class repAnalysis extends HTMLElement {
         <br>
         <div class="row">
             <div class="col-4">
+           
                 <rep-progress id="repChart" val="` + pre + `"></rep-progress>
             </div>
             <div class="col-8">

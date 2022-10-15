@@ -454,7 +454,7 @@ ipcMain.on('updatecustomeriteam', (event, obj) => {
 
 
 
-//rep AnalysisipcMain.on('updatecustomer', (event, args) => {
+//rep Analysis
 ipcMain.on('repAnalysis', (event, args) => {
 
     var y = args.year;
@@ -462,6 +462,26 @@ ipcMain.on('repAnalysis', (event, args) => {
     console.log(y);
     var sql = "select sum(op.quantity*p.price) as total_price from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) and date between '" + y + "-" + m + "-1' and '" + y + "-" + m + "-31'";
     console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+//product analysis
+
+ipcMain.on('productAnalysis', (event, args) => {
+
+    var y = args.year;
+    var m = args.month;
+    console.log(m);
+    var sql = "select sum(op.quantity) as total from navode.order_product as op,navode.product as p,navode.order as o where (op.o_id=o.o_id and p.p_id=op.p_id) and date between '" + y + "-" + m + "-1' and '" + y + "-" + m + "-31' group by op.p_id";
+
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record");
