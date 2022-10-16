@@ -106,7 +106,7 @@ export class viewOrder extends HTMLElement {
 
            
         </table>
-        <button style="margin-left: 40px;"><</button><button>></button>
+        
 
         
 

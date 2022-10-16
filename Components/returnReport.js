@@ -21,10 +21,10 @@ export class returnReport extends HTMLElement {
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="Components/invoice.css">
-        <div class="container" style="width: 35%;">
+        <div class="container" style="width: 40%;">
         <div class="row">
             <div class="col-2">
-                <img src="images/kotmale-kisK26bHwB (1).png" alt="" style="height: 70%; width:160%">
+                <img src="images/kotmale-kisK26bHwB (1).png" alt="" style="height: 60%; width:160%">
             </div>
             <div class="col-10">
                 <h4>NAVOD DISTRIBUTION</h4>

@@ -12,6 +12,8 @@ export class productAnalysis extends HTMLElement {
     connectedCallback() {
 
         this.render();
+       
+ 
 
 
     }
@@ -51,7 +53,7 @@ export class productAnalysis extends HTMLElement {
     <div class="row ">
         <div class="col-4">
         
-            <donut-chart></donut-chart>
+  
         
         </div>
         <div class="col-4" style="padding-top:5%">

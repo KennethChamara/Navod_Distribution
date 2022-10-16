@@ -43,6 +43,7 @@ export class addSalesRep extends HTMLElement {
               
               
             }
+            
             button{
                 width: 80px; 
                 height:40px;  
@@ -56,7 +57,7 @@ export class addSalesRep extends HTMLElement {
             </style>
             
     
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Sales Rep/Add Sales Rep</p>
         <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 550px; margin-left: 300px;">
             <img src="images/icons8-fast-moving-consumer-goods-100.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
             
@@ -79,8 +80,8 @@ export class addSalesRep extends HTMLElement {
             
         </form>
         
-        <button style="background-color:rgba(255, 68, 68, 1);margin-left: 490px;"><b>Cancel</b></button>
-        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 20px; margin-bottom:30px;"><b>Save</b></button>`;
+        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 500px; margin-bottom: 490px;"><b>Save</b></button>
+        <button style="background-color:rgba(255, 68, 68, 1);margin-left:20px;"><b>Cancel</b></button>`;
 
     }
 

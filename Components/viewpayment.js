@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-export class viewCustomer extends HTMLElement {
+export class viewpayment extends HTMLElement {
     constructor() {
         super();
 
@@ -10,7 +10,8 @@ export class viewCustomer extends HTMLElement {
     }
 
     connectedCallback() {
-        let reply = ipcRenderer.sendSync('viewCustomer', 'a string');
+        let reply = ipcRenderer.sendSync('viewpayment', 'a string');
+        
         console.log(reply[0].name)
         const na = reply;
 
@@ -24,19 +25,21 @@ export class viewCustomer extends HTMLElement {
             const row = table.insertRow(i + 1);
 
 
-            row.insertCell(0).innerHTML = reply[i].name;
-            row.insertCell(1).innerHTML = reply[i].phone;
-            row.insertCell(2).innerHTML = reply[i].address;
-            row.insertCell(3).innerHTML = reply[i].route;
-            row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(5).innerHTML = `<a onclick='updatecustomer(${reply[i].customer_id})'><img src='images/icons8-update-48.png' style="width:15%; height:15%;"></a>`;
+            row.insertCell(0).innerHTML = reply[i].invoice_no;
+            row.insertCell(1).innerHTML = reply[i].amout;
+            row.insertCell(2).innerHTML = reply[i].cheque_no;
+            row.insertCell(3).innerHTML = reply[i].status;
+            row.insertCell(4).innerHTML = reply[i].name;
+            row.insertCell(5).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
+            row.insertCell(6).innerHTML = `<a onclick='updatepayment(${reply[i].payment_id})'><img src='images/icons8-update-48.png' style="width:17%; height:17%;"></a>`;
+
 
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');
 
 
-                ipcRenderer.send("deleteCustomer", reply[i].customer_id)
+                ipcRenderer.send("deletepayment", reply[i].payment_id)
                 tb.remove()
 
                 this.connectedCallback()
@@ -82,7 +85,7 @@ export class viewCustomer extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Customer/View Customer</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
         <br>  
 
         <div class="tbl" id="tb">
@@ -92,17 +95,20 @@ export class viewCustomer extends HTMLElement {
             <table id="jana">
             <tr>
                 
+                <th>Invoice No</th>
+                <th>Amount(Rs)</th>
+                <th>Cheque No</th>
+                <th>Status</th>
                 <th>Customer</th>
-                <th>Contact No</th>
-                <th>Address</th>
-                <th>Route</th>
+                <th></th>
                 <th></th>
                 
             </tr>
 
            
         </table>
-    
+        <button style="margin-left: 40px;"><</button><button>></button>
+
         
 
 
@@ -117,4 +123,4 @@ export class viewCustomer extends HTMLElement {
 
 }
 
-customElements.define('view-customer', viewCustomer)
+customElements.define('view-payment', viewpayment)

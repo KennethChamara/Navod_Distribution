@@ -51,22 +51,7 @@ export class InventoryManagement extends HTMLElement {
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}
 
 
 
@@ -81,7 +66,7 @@ export class InventoryManagement extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Inventory/Inventary Management</p>
         <br>  
 
         <div class="tbl" id="tb">
@@ -96,14 +81,12 @@ export class InventoryManagement extends HTMLElement {
                 <th>Category</th>
                 <th>Quantity</th>
                 <th></th>
+                <th></th>
                 
             </tr>
 
            
-        </table>
-        <button style="margin-left: 40px;"><</button><button>></button>
-
-        
+        </table>       
 
 
     </div>

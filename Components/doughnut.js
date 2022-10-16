@@ -34,7 +34,7 @@ export class doughnut extends HTMLElement {
                     '#EDBE86'
                 ],
                 borderColor: 'white',
-                data: [0, 10, 5, 2, 20, 30, 45],
+                data: this.getAttribute("val1") ,
             }]
         };
 

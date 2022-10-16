@@ -12,30 +12,30 @@ export class updatereturns extends HTMLElement {
     connectedCallback() {
 
         var upreply = ipcRenderer.sendSync('updatereturns', this.getAttribute("p_id"), this.getAttribute("customer_id"), this.getAttribute("date"));
-
-        //var upcus = ipcRenderer.sendSync('selectcustomer', upreply[0].customer_id);
-        console.log(upreply);
-        this.render(upreply, upcus);
+        var upcus = ipcRenderer.sendSync('selectcustomer', upreply[0].customer_id);
+        var upcus1 = ipcRenderer.sendSync('selectcustomer1',upreply[0].p_id);
+        console.log(upreply[0].customer_id);
+        this.render(upreply,upcus,upcus1);
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
-            const item = this.shadowRoot.querySelector('#item');
-            const cname = this.shadowRoot.querySelector('#cname');
+          
             const date = this.shadowRoot.querySelector('#date');
             const mfcDate = this.shadowRoot.querySelector('#mfcDate');
             const quantity = this.shadowRoot.querySelector('#quantity');
             const description = this.shadowRoot.querySelector('#description');
 
-            let obj = JSON.parse('{"item":"' + item.value + '", "cname":"' + cname.value + '", "date": "' + date.value + '","mfcDate": "' + mfcDate.value + '", "quantity": "' + quantity.value + '","description": "' + description.value + '"}');
-            obj.id = upreply[0].o_id;
+            let obj = JSON.parse('{"date": "' + date.value + '","mfcDate": "' + mfcDate.value + '", "quantity": "' + quantity.value + '","description": "' + description.value + '"}');
+            obj.p_id = upreply[0].p_id;
+            obj.customer_id = upreply[0].customer_id;
             console.log(obj);
-            ipcRenderer.send("updateorderiteam", obj);
-            document.getElementById("main-body").innerHTML = "<view-order></view-order>";
+            ipcRenderer.send("updatereturniteam", obj);
+            document.getElementById("main-body").innerHTML = "<return-item></return-item>";
 
         })
 
     }
 
-    render(upreply, upcus) {
+    render(upreply,upcus,upcus1) {
         this.shadowRoot.innerHTML = `
         <style> 
             input[type=text] {
@@ -67,14 +67,7 @@ export class updatereturns extends HTMLElement {
         <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Customer/Add Order</p>
         <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 550px; margin-left: 300px;">
             <img src="images/icons8-fast-moving-consumer-goods-100.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
-            <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Item</h5>
-            
-            <input type="text" id="item" name="item" value="` + upreply[0].pname + `"><br>
-           
-            <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Customer_Name</h5>
-            
-            <input type="text" id="cname" name="cname" value="` + upcus[0].name + `"><br>
-            
+                       
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Date</h5>
             
             <input type="text" id="date" name="product" value="` + upreply[0].date + `"><br>
