@@ -27,7 +27,7 @@ function createWindow() {
             contextIsolation: false
         }
     })
-    win.loadFile("home.html")
+    win.loadFile("auth.html")
 }
 
 
@@ -209,10 +209,9 @@ ipcMain.on('deleteProduct', (event, id) => {
 
         var sql = "DELETE FROM navode.product WHERE p_id =" + id;
         connection.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log("Number of records deleted: " + result.affectedRows);
+            console.log("Number of records deleted: " + result?.affectedRows);
+            event.returnValue = err?false:true;
         });
-        console.log(id)
 
     })
     //view sales rep
@@ -442,23 +441,21 @@ ipcMain.on('updatecustomer', (event, args) => {
 
 ipcMain.on('logIn', (event, args) => {
     // var sqlName = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
-    var sqlName = "select name from navode.user where name='"+args.user+"'";
-    connection.query(sqlName, function(err, row) {
-
+    var sqlName = "select name,password from navode.user where name='"+args.name+"'";
+    connection.query(sqlName, function(err, rows) {
         if (err) throw err;
-       
-        let nameval= row;
-        if(row.length != 0){
-            let sqlPass = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
-            connection.query(sqlPass, function(err, rows) {
-
-                if (err) throw err;
-                // console.log("name a pass",rows[0].name??'',nameval[0].name);
-                event.returnValue = [true,rows[0]?.name!=undefined?true:false];
-            });
+        
+        if(rows.length != 0){
+            if(args.name == rows[0].name && args.password == rows[0].password){
+                event.returnValue = [true,true];
+            }else{
+                event.returnValue = [true,false];//pass incorrect
+            }
+           
         }else{
                 event.returnValue = [false,false]; //invalid user and pass
         }
+        
     });
     
 });

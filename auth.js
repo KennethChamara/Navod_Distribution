@@ -25,17 +25,17 @@ function logIn() {
     } 
 
     const args = {
-        user: name.value,
+        name: name.value,
         password: pass.value
     };
 
     const reply = ipcRenderer.sendSync("logIn", args);
-    console.log("val",reply);
+    
     if(reply[0]){
         if(reply[1]){
             name.classList.remove("error");
             pass.classList.remove("error");
-            window.location.replace("./home.html");   
+            window.location.replace("./index.html");   
         }else{
             document.getElementById("invalid").innerHTML = 'Password incorrect';
             pass.classList.add("error");
@@ -46,8 +46,5 @@ function logIn() {
         pass.classList.add("error");
         name.classList.add("error");
     }
-    
-    
-    
     
 }
