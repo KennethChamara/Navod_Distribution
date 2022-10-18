@@ -12,8 +12,25 @@ export class inventoryReport extends HTMLElement {
     connectedCallback() {
 
         this.render();
+        let reply = ipcRenderer.sendSync('inventoryChart', 2022);
+        let reply1 = ipcRenderer.sendSync('inoiceReport', 2022);
+        let reply2 = ipcRenderer.sendSync('returnReport', 2022);
+
+        const table = this.shadowRoot.querySelector('#tbl');
+
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
 
 
+            row.insertCell(0).innerHTML = reply[i].pname;
+            row.insertCell(1).innerHTML = reply[i].quantity;
+            row.insertCell(2).innerHTML = reply1[i].total;
+            row.insertCell(3).innerHTML = reply2[i].quantity;
+            row.insertCell(4).innerHTML = reply[i].quantity - reply1[i].total - reply2[i].quantity;
+
+        }
+
+        console.log(reply)
     }
 
     render() {
@@ -33,7 +50,7 @@ export class inventoryReport extends HTMLElement {
        
 
         <div class="row">
-            <table>
+            <table id='tbl'>
                 <tr>
                     <th class="c1">Products</th>
                     <th class="c2">In-Stock</th>
@@ -42,51 +59,12 @@ export class inventoryReport extends HTMLElement {
                     <th class="c1">Currents</th>
                     
                 </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                </tr>
-
-                <tr>
-                <td class="c2">
-                    <p></p>
-                </td>
-                <td class="c2"></td>
-                <td class="c1"></td>
-                <td class="c2"></td>
-                <td class="c1"></td>
-            </tr>
-            <tr>
-                <td class="c2">
-                    <p></p>
-                </td>
-                <td class="c2"></td>
-                <td class="c1"></td>
-                <td class="c2"></td>
-                <td class="c1"></td>
-            </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    
-
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
                 
             </table>
         </div>
         <div class="row">
             <h7 style="font-size:15px;">Sales Distribution According to the Products in the Quatar</h7>
-            <sales-chart></sales-chart>
+            <inventory-chart></inventory-chart>
         </div>
         <br>
         <div class="row">

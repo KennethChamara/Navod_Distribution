@@ -12,7 +12,24 @@ export class salesReport extends HTMLElement {
     connectedCallback() {
 
         this.render();
+        let reply = ipcRenderer.sendSync('inoiceReport', 2022);
+        let reValue = ipcRenderer.sendSync('returnValue', 2022);
 
+        const table = this.shadowRoot.querySelector('#tbl');
+
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
+
+
+            row.insertCell(0).innerHTML = reply[i].pname;
+            row.insertCell(1).innerHTML = reply[i].value;
+            row.insertCell(2).innerHTML = reply[i].value - ((reply[i].value * 7) / 100);
+            row.insertCell(3).innerHTML = reValue[i].value;
+            row.insertCell(4).innerHTML = (reply[i].value * 7) / 100;
+
+
+
+        }
 
     }
 
@@ -33,7 +50,7 @@ export class salesReport extends HTMLElement {
        
 
         <div class="row">
-            <table>
+            <table id="tbl">
                 <tr>
                     <th class="c1">Products</th>
                     <th class="c2">Sellings</th>
@@ -42,50 +59,7 @@ export class salesReport extends HTMLElement {
                     <th class="c1">Profit</th>
                 
                 </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    
-                </tr>
-
-                <tr>
-
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    
-                    <td class="c2"></td>
-
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
+                
                 
             </table>
         </div>

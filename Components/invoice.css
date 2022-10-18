@@ -11,6 +11,13 @@
 th,
 td {
     text-align: center;
+    background-color: #6C8793;
+    border: 10px solid white;
+    border-collapse: collapse;
+}
+
+td {
+    font-size: 8px;
 }
 
 .c1 {

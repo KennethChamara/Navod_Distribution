@@ -11,31 +11,37 @@ export class inventoryChart extends HTMLElement {
 
     connectedCallback() {
         this.render();
-
-        const labels = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-
+        let reply = ipcRenderer.sendSync('inventoryChart', 2022);
+        console.log(reply)
+        const labels = []
+        const d = []
+        for (let i = 0; i < reply.length; i++) {
+            labels[i] = reply[i].pname
+            d[i] = reply[i].quantity
+        }
         const data = {
             labels: labels,
             datasets: [{
-                data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
-                borderColor: "red",
-                fill: false
-            }, {
-                data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-                borderColor: "green",
-                fill: false
-            }, {
-                data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
-                borderColor: "blue",
-                fill: false
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: d,
             }]
         };
 
         const config = {
-            type: 'line',
+            type: 'bar',
             data: data,
             options: {
-                legend: { display: false }
+                scales: {
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 7.8 //this change the font size
+                            }
+                        }
+                    }
+                }
             }
         };
 
@@ -55,7 +61,7 @@ export class inventoryChart extends HTMLElement {
         <link rel="stylesheet" href="Components/table.css">           
         <script src="node_modules/chart.js/dist/chart.min.js"></script>
 
-        <div style="width:80%; height:80%">
+        <div style="width:100%; height:100%">
             <canvas id="myChart"></canvas>
         </div>
 
