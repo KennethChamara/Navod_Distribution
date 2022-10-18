@@ -14,7 +14,7 @@ template.innerHTML = `
 
 
 <div>
-         <button class="logout" style="margin-left:1100px;">LOGOUT</button>
+         <button class="logout" onclick="logOut()" style="margin-left:1100px;">LOGOUT</button>
       <div style="margin: 85px;">
       <div style="background-color: rgb(245, 224, 175); width:200px; height: 80px; padding: 15px; margin-left:-40px; margin-top: 70px;"><img src="images/analytics-circle-green-512.webp" style="width: 50px; height:50px; margin-top:18px; "><h5 style=" margin-left:70px; margin-top:-40px;">Analysis</h5></div>
       <div style="background-color: rgb(245, 224, 175); width:200px; height: 80px; padding: 15px; margin-left: 370px; margin-top: -110px;"><img src="images/red_shoppictbasket_1484336512-1.png " alt=" "style="width: 50px; height:50px;margin-top:18px; "><h5 style=" margin-left:70px; margin-top:-40px;">Products</h5></div>
