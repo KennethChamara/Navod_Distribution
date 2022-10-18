@@ -129,9 +129,3 @@ function updaterep(rep_id) {
     document.getElementById("main-body").innerHTML = "<update-rep rep_id=${rep_id}></update-rep>";
     document.getElementById("myLinks").style.display = "none";
 }
-
-
-function updatereturns(p_id, customer_id, date) {
-    document.getElementById("main-body").innerHTML = "<update-returns p_id=${p_id}, customer_id=${customer_id}, date=${date}></update-returns>";
-    document.getElementById("myLinks").style.display = "none";
-}
