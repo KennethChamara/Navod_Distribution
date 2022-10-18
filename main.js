@@ -558,7 +558,8 @@ ipcMain.on('inventory', (event, payment_id) => {
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record inserted");
-
+    });
+});
 //product analysis
 //doughnut chart
 ipcMain.on('productAnalysis', (event, args) => {
@@ -585,7 +586,8 @@ ipcMain.on('stock', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
-
+    });
+});
 //bar chart
 ipcMain.on('bar', (event, args) => {
 
@@ -634,6 +636,8 @@ ipcMain.on('productamount', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
+    });
+});
 ipcMain.on('profit', (event, args) => {
 
     var y = args;

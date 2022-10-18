@@ -112,8 +112,3 @@ function inventoryReport() {
     document.getElementById("main-body").innerHTML = '<inventory-report></inventory-report>';
     document.getElementById("myLinks").style.display = "none";
 }
-
-function login() {
-    document.getElementById("main-body").innerHTML = '<log-in></log-in>';
-    document.getElementById("myLinks").style.display = "none";
-}
