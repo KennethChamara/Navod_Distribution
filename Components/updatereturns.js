@@ -10,9 +10,12 @@ export class updatereturns extends HTMLElement {
     }
 
     connectedCallback() {
-        var upreply = ipcRenderer.sendSync('updatereturns', this.getAttribute("pname"));
+
+        var upreply = ipcRenderer.sendSync('updatereturns', this.getAttribute("p_id"), this.getAttribute("customer_id"), this.getAttribute("date"));
+
+        //var upcus = ipcRenderer.sendSync('selectcustomer', upreply[0].customer_id);
         console.log(upreply);
-        this.render(upreply);
+        this.render(upreply, upcus);
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const item = this.shadowRoot.querySelector('#item');
@@ -32,7 +35,7 @@ export class updatereturns extends HTMLElement {
 
     }
 
-    render(upreply) {
+    render(upreply, upcus) {
         this.shadowRoot.innerHTML = `
         <style> 
             input[type=text] {
@@ -70,7 +73,7 @@ export class updatereturns extends HTMLElement {
            
             <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Customer_Name</h5>
             
-            <input type="text" id="cname" name="cname" value="` + upreply[0].name + `"><br>
+            <input type="text" id="cname" name="cname" value="` + upcus[0].name + `"><br>
             
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Date</h5>
             

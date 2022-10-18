@@ -12,14 +12,29 @@ export class doughnut extends HTMLElement {
     connectedCallback() {
         this.render();
 
-        const labels = [
-            'Kalkiri',
-            'Butter',
-            'Ghee',
-            'Cheese',
-            'Milk',
-            'Curd',
-        ];
+        const labels = [];
+        const year = this.getAttribute('val')[1] + this.getAttribute('val')[2] + this.getAttribute('val')[3] + this.getAttribute('val')[4];
+        if (this.getAttribute('val')[7] == ']') {
+            var month = this.getAttribute('val')[6]
+        } else {
+            month = this.getAttribute('val')[6] + this.getAttribute('val')[7]
+
+        }
+
+
+
+        let obj = JSON.parse('{"month":"' + month + '", "year":"' + year + '"}');
+        let reply = ipcRenderer.sendSync('productAnalysis', obj);
+
+        let d = []
+        if (reply.length == 0) { d = [10, 10, 10] } else {
+            for (let i = 0; i < reply.length; i++) {
+                d[i] = reply[i].total
+                labels[i] = reply[i].category
+
+            }
+
+        }
 
         const data = {
             labels: labels,
@@ -30,11 +45,12 @@ export class doughnut extends HTMLElement {
                     '#EDE986',
                     '#E586ED',
                     '#8886ED',
-                    '#86ED9D',
-                    '#EDBE86'
+
                 ],
                 borderColor: 'white',
-                data: [0, 10, 5, 2, 20, 30, 45],
+
+                data: d,
+
             }]
         };
 
@@ -48,6 +64,7 @@ export class doughnut extends HTMLElement {
             this.shadowRoot.getElementById('myChart'),
             config
         );
+
 
 
     }
@@ -64,7 +81,7 @@ export class doughnut extends HTMLElement {
             <canvas id="myChart"></canvas>
         </div>
 
-        <button class="btn btn-primary"></button>
+        
     
             `;
     }

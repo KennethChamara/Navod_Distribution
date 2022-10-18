@@ -12,6 +12,29 @@ export class returnReport extends HTMLElement {
     connectedCallback() {
 
         this.render();
+        let reply = ipcRenderer.sendSync('returnReport', 'a string');
+
+        console.log(reply)
+
+        const table = this.shadowRoot.querySelector('#tbl');
+
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
+
+
+            row.insertCell(0).innerHTML = reply[i].pname;
+            row.insertCell(1).innerHTML = reply[i].quantity;
+            row.insertCell(2).innerHTML = reply[i].manufacture_date;
+            row.insertCell(3).innerHTML = '2022-01-03';
+            row.insertCell(4).innerHTML = reply[i].description;
+
+
+
+
+
+
+        }
+
 
 
     }
@@ -21,7 +44,7 @@ export class returnReport extends HTMLElement {
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="Components/invoice.css">
-        <div class="container" style="width: 35%;">
+        <div class="container" style="width: 45%;">
         <div class="row">
             <div class="col-2">
                 <img src="images/kotmale-kisK26bHwB (1).png" alt="" style="height: 70%; width:160%">
@@ -45,137 +68,15 @@ export class returnReport extends HTMLElement {
         </div>
 
         <div class="row">
-            <table>
+            <table id='tbl'>
                 <tr>
                     <th class="c1">Products</th>
                     <th class="c2">Quantity</th>
                     <th class="c1">MFD</th>
                     <th class="c2">EXP</th>
                     <th class="c1">Reason</th>
-                    <th class="c2">Value</th>
+                    
                 </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-
-                <tr>
-
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                </tr>
-
             </table>
         </div>
 

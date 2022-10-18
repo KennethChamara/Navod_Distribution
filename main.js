@@ -27,7 +27,7 @@ function createWindow() {
             contextIsolation: false
         }
     })
-    win.loadFile("index.html")
+    win.loadFile("auth.html")
 }
 
 
@@ -209,10 +209,9 @@ ipcMain.on('deleteProduct', (event, id) => {
 
         var sql = "DELETE FROM navode.product WHERE p_id =" + id;
         connection.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log("Number of records deleted: " + result.affectedRows);
+            console.log("Number of records deleted: " + result?.affectedRows);
+            event.returnValue = err?false:true;
         });
-        console.log(id)
 
     })
     //view sales rep
@@ -354,6 +353,33 @@ ipcMain.on('updatecustomeriteam', (event, obj) => {
     });
 });
 
+ipcMain.on('updatereturns', (event, p_id, customer_id, date) => {
+
+    var sql = "select * from navode.returns where p_id=" + p_id + " and customer_id=" + customer_id + " and date=" + date;
+    console.log(sql);
+    connection.query(sql, function(err, rows) {
+        if (err) throw err;
+        console.log(rows.p_id);
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('selectcustomer', (event, customer_id) => {
+
+    var sql = "select * from navode.customer_shop where customer_id=" + customer_id;
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
 
 ipcMain.on('updateorder', (event, args) => {
     var sql = "select * from navode.order  where o_id=o_id";
@@ -427,15 +453,192 @@ ipcMain.on('updatecustomeriteam', (event, obj) => {
 
 
 
-//rep AnalysisipcMain.on('updatecustomer', (event, args) => {
-ipcMain.on('updatecustomer', (event, args) => {
-    var sql = "select * from navode.order as o,order_product as op,product as p where ";
+//rep Analysis
+ipcMain.on('repAnalysis', (event, args) => {
+
+    var y = args.year;
+    var m = args.month;
+    console.log(y);
+    var sql = "select sum(op.quantity*p.price) as total_price from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) and date between '" + y + "-" + m + "-1' and '" + y + "-" + m + "-31'";
+    console.log(sql)
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
-        console.log("1 record inserted");
+        console.log("1 record");
 
         event.returnValue = rows;
 
 
     });
+});
+
+
+//product analysis
+//doughnut chart
+ipcMain.on('productAnalysis', (event, args) => {
+
+    var y = args.year;
+    var m = args.month;
+
+    var sql = "select p.category,sum(op.quantity) as total from navode.order_product as op,navode.product as p,navode.order as o where (op.o_id=o.o_id and p.p_id=op.p_id) and date between '" + y + "-" + m + "-1' and '" + y + "-" + m + "-31' group by p.category";
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+//bar chart
+ipcMain.on('bar', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select month(o.date) as month,sum(op.quantity) as total from navode.order_product as op,navode.product as p,navode.order as o where (op.o_id=o.o_id and p.p_id=op.p_id) and year(o.date)='" + y + "'   group by month(o.date)";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+ipcMain.on('profit', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select p.pname,(op.quantity*p.price) as total from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) and month(date)=" + args;
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+//inventory chart
+
+
+ipcMain.on('inventoryChart', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select p.pname,sum(i.quantity) as quantity from navode.product as p,navode.inventory as i,navode.stock as s where(i.s_id = s.s_id and i.p_id = p.p_id) and month(date)=09 group by(i.p_id)";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+//invoice report
+ipcMain.on('inoiceReport', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select p.pname,p.price,(op.quantity) as total,(op.quantity*p.price) as value from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) and month(date)=09";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+//return report
+ipcMain.on('returnReport', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select p.pname,r.quantity,r.manufacture_date,r.description from navode.returns as r,navode.product as p where r.p_id=p.p_id";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+ipcMain.on('salesReport', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select (op.quantity*p.price) as value,month(date) as month from navode.product as p,navode.order_product as op,navode.order as o where(op.o_id = o.o_id and p.p_id = op.p_id) group by month(date)";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+ipcMain.on('returnValue', (event, args) => {
+
+    var y = args;
+
+
+    var sql = "select p.pname,(r.quantity*p.price) as value from navode.returns as r,navode.product as p where r.p_id=p.p_id and month(date)=09;";
+    console.log(sql)
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('logIn', (event, args) => {
+    // var sqlName = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
+    var sqlName = "select name,password from navode.user where name='"+args.name+"'";
+    connection.query(sqlName, function(err, rows) {
+        if (err) throw err;
+        
+        if(rows.length != 0){
+            if(args.name == rows[0].name && args.password == rows[0].password){
+                event.returnValue = [true,true];
+            }else{
+                event.returnValue = [true,false];//pass incorrect
+            }
+           
+        }else{
+                event.returnValue = [false,false]; //invalid user and pass
+        }
+        
+    });
+    
 });

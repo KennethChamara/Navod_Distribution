@@ -147,7 +147,14 @@
         </div>
     </main>
     <!--Main layout-->
-
+    <script>
+        function updatereturns(p_id, customer_id, date) {
+            console.log(p_id);
+            console.log(customer_id);
+            console.log(date);
+            document.getElementById("main-body").innerHTML = `<update-returns p_id="${p_id}" customer_id="${customer_id}" date="${date}"></update-returns>`;
+        }
+    </script>
     <script src="js/burgerMenu.js"></script>
     <script src="js/add.js"></script>
     <script src="js/sideBarDropDown.js"></script>
@@ -155,5 +162,12 @@
 
 
 </body>
+
+<script>
+    const { app, BrowserWindow, ipcMain } = require("electron")
+    function logOut() {
+        window.location.replace("./auth.html");
+    }
+</script>
 
 </html>
