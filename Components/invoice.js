@@ -12,8 +12,26 @@ export class Invoice extends HTMLElement {
     connectedCallback() {
 
         this.render();
+        let reply = ipcRenderer.sendSync('inoiceReport', 2022);
+        let reply1 = ipcRenderer.sendSync('inventoryChart', 'a string');
+        console.log(reply)
+        const table = this.shadowRoot.querySelector('#tbl');
+
+        for (let i = 0; i < reply.length; i++) {
+            const row = table.insertRow(i + 1);
 
 
+            row.insertCell(0).innerHTML = reply[i].pname;
+            row.insertCell(1).innerHTML = reply[i].price;
+            row.insertCell(2).innerHTML = reply[i].total;
+            row.insertCell(3).innerHTML = reply[i].value;
+            row.insertCell(4).innerHTML = reply1[i].quantity - reply[i].total;
+
+
+
+
+
+        }
     }
 
     render() {
@@ -45,7 +63,7 @@ export class Invoice extends HTMLElement {
         </div>
 
         <div class="row">
-            <table>
+            <table id='tbl'>
                 <tr>
                     <th class="c1">Products</th>
                     <th class="c2">Unit Price</th>
@@ -54,108 +72,69 @@ export class Invoice extends HTMLElement {
                     <th class="c1">Free Qty</th>
                 </tr>
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
 
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
                 
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
                 <tr>
-                    <td class="c2">
+                    <td>
                         <p></p>
                     </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     
                 </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    
-                </tr>
-                <tr>
-                    <td class="c2">
-                        <p></p>
-                    </td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    <td class="c2"></td>
-                    <td class="c1"></td>
-                    
-                </tr>
-
+                
+                
             </table>
         </div>
 

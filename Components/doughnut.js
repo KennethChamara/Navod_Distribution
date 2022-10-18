@@ -12,25 +12,30 @@ export class doughnut extends HTMLElement {
     connectedCallback() {
         this.render();
 
-        const labels = [
-
-            'Butter',
-            'Cheese',
-            'Milk',
-            'Kalkiri',
-        ];
+        const labels = [];
         const year = this.getAttribute('val')[1] + this.getAttribute('val')[2] + this.getAttribute('val')[3] + this.getAttribute('val')[4];
         if (this.getAttribute('val')[7] == ']') {
             var month = this.getAttribute('val')[6]
         } else {
-            var month = this.getAttribute('val')[6] + this.getAttribute('val')[7]
+            month = this.getAttribute('val')[6] + this.getAttribute('val')[7]
 
         }
 
 
+
         let obj = JSON.parse('{"month":"' + month + '", "year":"' + year + '"}');
         let reply = ipcRenderer.sendSync('productAnalysis', obj);
-        console.log(reply)
+
+        let d = []
+        if (reply.length == 0) { d = [10, 10, 10] } else {
+            for (let i = 0; i < reply.length; i++) {
+                d[i] = reply[i].total
+                labels[i] = reply[i].category
+
+            }
+
+        }
+
         const data = {
             labels: labels,
             datasets: [{
@@ -44,7 +49,7 @@ export class doughnut extends HTMLElement {
                 ],
                 borderColor: 'white',
 
-                data: [reply[0].total, reply[1].total, reply[2].total],
+                data: d,
 
             }]
         };

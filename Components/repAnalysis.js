@@ -9,9 +9,9 @@ export class repAnalysis extends HTMLElement {
         });
     }
 
-    connectedCallback(p = 100, m = 'Month', y = 'Year') {
+    connectedCallback(p = 100, m = 'Month', y = 'Year', tp = 0) {
 
-        this.render(p, m, y);
+        this.render(p, m, y, tp);
 
 
         const click = this.shadowRoot.querySelector('#click');
@@ -69,12 +69,13 @@ export class repAnalysis extends HTMLElement {
 
             let reply = ipcRenderer.sendSync('repAnalysis', obj);
             console.log(reply[0].total_price)
-            let pre = Math.round((reply[0].total_price / 15000) * 100);
+            let tp = reply[0].total_price
+            let pre = Math.round((reply[0].total_price / 2000000) * 100);
             const container = this.shadowRoot.querySelector('.container');
 
             console.log(p)
             container.remove()
-            this.connectedCallback(pre, month, year)
+            this.connectedCallback(pre, month, year, tp.toLocaleString('en-US'))
 
 
 
@@ -84,7 +85,7 @@ export class repAnalysis extends HTMLElement {
 
     }
 
-    render(pre, m, y) {
+    render(pre, m, y, total_price) {
 
         this.shadowRoot.innerHTML += `
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
@@ -144,15 +145,15 @@ export class repAnalysis extends HTMLElement {
                 <div class="row">
                     <div class="col-6">
                         <div class="b2">
-                            <h2 class="bh3">150 000</h2><br>
+                            <h2 class="bh3">2,000,000</h2><br>
                             <h2 class="bh3">Monthly Target</h2>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="b2" style="background-color:#EDC5F6">
-                            <h2 class="bh3">150 000</h2><br>
-                            <h2 class="bh3">Monthly Target</h2>
+                            <h2 class="bh3">` + total_price + `</h2><br>
+                            <h2 class="bh3">Monthly Sales</h2>
                         </div>
 
                     </div>

@@ -11,15 +11,52 @@ export class barChart extends HTMLElement {
 
     connectedCallback() {
         this.render();
+        if (this.getAttribute('val')[2] == ']') {
+            var month = this.getAttribute('val')[1]
+        } else {
+            var month = this.getAttribute('val')[1] + this.getAttribute('val')[2]
 
+        }
+
+        console.log(month)
+
+        let m = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        let reply = ipcRenderer.sendSync('bar', 2022);
+        let num = []
+        let j = parseInt(month)
+        console.log(num)
+        console.log(reply)
+
+        for (let i = 0; i < reply.length; i++) {
+
+            if ((parseInt(month)) - 2 == reply[i].month) {
+                j -= 2
+                num[j] = reply[i].total
+            } else if ((parseInt(month)) - 1 == reply[i].month) {
+                j--
+                num[j] = reply[i].total
+            } else if ((parseInt(month)) == reply[i].month) {
+                num[j] = reply[i].total
+            } else if ((parseInt(month)) + 1 == reply[i].month) {
+                j++
+                num[j] = reply[i].total
+            } else if ((parseInt(month)) + 2 == reply[i].month) {
+                j += 2
+                num[j] = reply[i].total
+            }
+            j = parseInt(month);
+        }
+
+        console.log(num)
         const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
+            m[parseInt(month) - 2],
+            m[parseInt(month) - 1],
+            m[parseInt(month)],
+            m[parseInt(month) + 1],
+            m[parseInt(month) + 2],
+
         ];
+
 
         const data = {
             labels: labels,
@@ -27,7 +64,7 @@ export class barChart extends HTMLElement {
                 label: 'My First dataset',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
+                data: [num[parseInt(month) - 2], num[parseInt(month) - 1], num[parseInt(month)], num[parseInt(month) + 1], num[parseInt(month) + 2]],
             }]
         };
 
