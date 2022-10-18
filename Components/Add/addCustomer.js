@@ -56,7 +56,7 @@ export class addCustomer extends HTMLElement {
             </style>
             
     
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Add Customer</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Customer/Add Customer</p>
         <form style="background-color: rgb(255, 255, 255); width: 400px; margin-top: 45px; height: 500px; margin-left: 300px;">
             <img src="images/customers-icon-3.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
             <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);"> Name</h5>
@@ -76,8 +76,8 @@ export class addCustomer extends HTMLElement {
             <input type="text" id="route" name="lname"><br>
         </form>
         
-        <button style="background-color:rgba(255, 68, 68, 1);margin-left: 490px;"><b>Cancel</b></button>
-        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 20px; "><b>Save</b></button>`;
+        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; "><b>Save</b></button>
+        <button style="background-color:rgba(255, 68, 68, 1);margin-left: 20px;"><b>Cancel</b></button>`;
 
     }
 

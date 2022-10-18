@@ -10,7 +10,6 @@ export class productAnalysis extends HTMLElement {
     }
 
     connectedCallback(p = '', y = 'year', m1 = 'month') {
-
         this.render(p, y, m1);
 
 
@@ -159,6 +158,7 @@ export class productAnalysis extends HTMLElement {
     <div class="row ">
         <div class="col-4">
         
+
             <donut-chart val=[` + y + `,` + m + `]></donut-chart>
         
         </div>

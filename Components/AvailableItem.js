@@ -61,7 +61,7 @@ export class AvailableItem extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Inventory/Available Items</p>
         <br>  
 
         <div class="tbl" id="tb">
