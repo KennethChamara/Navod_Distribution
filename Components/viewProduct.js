@@ -14,15 +14,11 @@ export class viewProduct extends HTMLElement {
 
         const na = reply;
 
-
-
-
         this.render()
         const table = this.shadowRoot.querySelector('#jana');
 
         for (let i = 0; i < reply.length; i++) {
             const row = table.insertRow(i + 1);
-
 
             row.insertCell(0).innerHTML = reply[i].pname;
             row.insertCell(1).innerHTML = reply[i].price;
@@ -34,30 +30,24 @@ export class viewProduct extends HTMLElement {
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');
 
-
-                ipcRenderer.send("deleteProduct", reply[i].p_id)
-                tb.remove()
+                const response= ipcRenderer.sendSync("deleteProduct", reply[i].p_id)
+                console.log("records delete status",response);
+                if(response){
+                    tb.remove();
+                    console.log("records deleted");
+                }else{
+                    console.log("can't delete product");
+                    alert("can't delete product");
+                }
 
                 this.connectedCallback()
 
-
-
-
             })
-
-
-
-
 
 
         }
 
 }
-
-
-
-
-
 
     render() {
 

@@ -100,10 +100,16 @@ option {
 }
 
 table,
-th,
+th {
+    border: 1px solid white;
+    border-collapse: collapse;
+    background-color: #D7EEF3;
+}
+
 td {
     border: 1px solid white;
     border-collapse: collapse;
+    background-color: #EFFAF2;
 }
 
 th,
@@ -111,9 +117,8 @@ td {
     text-align: center;
 }
 
-.product {
-    background-color: #D7EEF3;
-    width: 60%;
+.ptbl td {
+    font-size: 12px;
 }
 
 .profit {
