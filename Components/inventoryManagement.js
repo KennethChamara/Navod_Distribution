@@ -81,7 +81,7 @@ export class InventoryManagement extends HTMLElement {
                 <th>Category</th>
                 <th>Quantity</th>
                 <th></th>
-                <th></th>
+                
                 
             </tr>
 

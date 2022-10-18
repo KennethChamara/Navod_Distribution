@@ -101,7 +101,7 @@ ipcMain.on('helloSync', (event, args) => {
 //available item
 
 ipcMain.on('availableItem', (event, args) => {
-    var sql = "select (i.quantity - o.quantity) as quantity,p.pname,p.price from order_product as o,inventory as i,product as p where o.p_id=i.p_id and p.p_id=o.p_id";
+    var sql = "select (i.quantity - o.quantity) as quantity,p.category,p.pname,p.price from order_product as o,inventory as i,product as p where o.p_id=i.p_id and p.p_id=o.p_id";
     connection.query(sql, function(err, rows, fields) {
 
         if (err) throw err;
@@ -544,6 +544,71 @@ ipcMain.on('repAnalysis', (event, args) => {
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
+});
+//Inventory Management
+
+
+ipcMain.on('inventory', (event, payment_id) => {
+    var sql = "select * from navode.product ";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+ipcMain.on('stock', (event, payment_id) => {
+    var sql = "SELECT s_id FROM navode.stock ORDER BY s_id DESC limit 1";
+   
+    connection.query(sql, function(err, rows, fields) {
+       
+        if (err) throw err;
+        console.log("1 record is selected");
+
+        event.returnValue = rows;
+
+
+    });
+});
+
+
+
+ipcMain.on("addinventory", (event, obj) => {
+        
+    var sql = "INSERT INTO stock (date, category, note) VALUES ('" + obj.date + "','" + obj.category + "','" + obj.note + "')";
+    connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+    });
+
+     
+})
+ipcMain.on("InventoryManagement", (event, obj) => {
+        
+    var sql = "INSERT INTO inventory (s_id,p_id,quantity) VALUES ('" + obj.s_id + "','" + obj.p_id + "','" + obj.quantity + "')";
+    connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+    });
+
+     
+})
+
+ipcMain.on('productamount', (event, payment_id) => {
+    var sql = "SELECT * FROM navode.product";
+   
+    connection.query(sql, function(err, rows, fields) {
+       
+        if (err) throw err;
+        console.log("1 record is selected");
 
         event.returnValue = rows;
 

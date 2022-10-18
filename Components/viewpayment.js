@@ -85,7 +85,7 @@ export class viewpayment extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Payment/Veiw Payment</p>
         <br>  
 
         <div class="tbl" id="tb">
@@ -107,7 +107,7 @@ export class viewpayment extends HTMLElement {
 
            
         </table>
-        <button style="margin-left: 40px;"><</button><button>></button>
+      
 
         
 
