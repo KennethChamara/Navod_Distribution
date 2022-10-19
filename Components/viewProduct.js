@@ -47,9 +47,7 @@ export class viewProduct extends HTMLElement {
 
         }
 
-    }
-
-
+}
 
     render() {
 
@@ -59,7 +57,7 @@ export class viewProduct extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Employee/Add Sales Rep</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Product/View Product</p>
         <br>  
 
         <div class="tbl" id="tb">
@@ -70,15 +68,16 @@ export class viewProduct extends HTMLElement {
             <tr>
                 
                 <th>Name</th>
-                <th>Price</th>
+                <th style="padding-right:5px">Price</th>
                 <th>Cateogory</th>
+                <th></th>
                 <th></th>
                 
             </tr>
 
            
         </table>
-        <button style="margin-left: 40px;"><</button><button>></button>
+        
 
         
 
