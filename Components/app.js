@@ -30,3 +30,4 @@ import { inventoryChart } from './inventoryChart.js';
 import { inventoryReport } from './inventoryReport.js';
 import { updatereturns } from './updatereturns.js';
 import { updatepayment } from './updatepayment.js';
+import { kasuni } from './kasuni.js';

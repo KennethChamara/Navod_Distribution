@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '12345', // or the original password : 'apaswword'
+    password: '', // or the original password : 'apaswword'
     database: 'navode'
 });
 
@@ -558,6 +558,10 @@ ipcMain.on('inventory', (event, payment_id) => {
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
     });
 });
 //product analysis
@@ -586,6 +590,10 @@ ipcMain.on('stock', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
+
+        event.returnValue = rows;
+
+
     });
 });
 //bar chart
@@ -636,6 +644,10 @@ ipcMain.on('productamount', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
+
+        event.returnValue = rows;
+
+
     });
 });
 ipcMain.on('profit', (event, args) => {
@@ -755,6 +767,8 @@ ipcMain.on('logIn', (event, args) => {
     // var sqlName = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
     var sqlName = "select name,password from navode.user where name='"+args.name+"'";
     connection.query(sqlName, function(err, rows) {
+        
+        console.log(rows[0].name);
         if (err) throw err;
         
         if(rows.length != 0){
