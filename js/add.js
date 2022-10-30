@@ -112,8 +112,8 @@ function inventoryReport() {
     document.getElementById("main-body").innerHTML = '<inventory-report></inventory-report>';
     document.getElementById("myLinks").style.display = "none";
 }
-function kasuni() {
-    document.getElementById("main-body").innerHTML = '<kas-uni></kas-uni>';
+
+function error() {
+    document.getElementById("main-body").innerHTML = "Name can't be blank";
     document.getElementById("myLinks").style.display = "none";
 }
-

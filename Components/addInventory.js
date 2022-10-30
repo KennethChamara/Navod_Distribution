@@ -13,23 +13,38 @@ export class addInventory extends HTMLElement {
 
         let i=0;
         var upreply = ipcRenderer.sendSync('inventory', 'string');
+        //var getid = ipcRenderer.sendSync('stock', 'string');
         this.render(upreply,i)
-        
-        
-      const done = this.shadowRoot.querySelector('#done');
-      done.addEventListener('click', () => {
+        const msg = this.shadowRoot.querySelector('#invalid');
+        const msg1 = this.shadowRoot.querySelector('#invalid1');
+        const done = this.shadowRoot.querySelector('#done');
+       done.addEventListener('click', () => {
             const date = this.shadowRoot.querySelector('#date');
             const category = this.shadowRoot.querySelector('#category');
             const note = this.shadowRoot.querySelector('#note');
-            let obj = JSON.parse('{"date":"' + date.value + '", "category":"' + category.value + '", "note":"' + note.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("addinventory", obj)
+            
+
+            if (date.value==null || date.value==""||category.value==null || category.value=="" ||note.value==null || note.value==""){ 
+                
+                msg.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"date":"' + date.value + '", "category":"' + category.value + '", "note":"' + note.value + '"}');
+                console.log(obj);
+                ipcRenderer.send("addinventory", obj)
+                /*getid = ipcRenderer.sendSync('stock', 'string');
+                this.render(upreply,i)*/
+            msg.innerHTML = " successfully added ";
+            }
         })
 
-       this.addIn(upreply,i);
+       this.addIn(upreply,i,msg,msg1);
     }    
 
-        addIn(upreply,i){
+        addIn(upreply,i,msg,msg1){
                
       /*const skip = this.shadowRoot.querySelector('#skip');
         skip.addEventListener('click', () => {
@@ -50,21 +65,48 @@ export class addInventory extends HTMLElement {
             const quantity = this.shadowRoot.querySelector('#quantity');
      
 
+            
+
+
+            if (quantity.value==null || quantity.value==""){ 
+                
+                msg1.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
             let obj = JSON.parse('{"name":"' + name.value + '",  "quantity": "' + quantity.value + '",  "s_id": "' + stock[0].s_id + '", "p_id": "' + upreply[i-1].p_id + '"}');
             ipcRenderer.send("InventoryManagement", obj)
             this.render(upreply,i);
+            msg1.innerHTML = " successfully added ";
+            }
+
+
+            
             if(i<productamount.length){
                 const done = this.shadowRoot.querySelector('#done');
                 done.addEventListener('click', () => {
                     const date = this.shadowRoot.querySelector('#date');
                     const category = this.shadowRoot.querySelector('#category');
-                    
-                    let obj = JSON.parse('{"date":"' + date.value + '", "category":"' + category.value + '"}');
-                    console.log(obj);
-                    ipcRenderer.send("addinventory", obj)
+                    const note = this.shadowRoot.querySelector('#note');
+                    if (date.value==null || date.value==""||category.value==null || category.value=="" ||note.value==null || note.value==""){ 
+                
+                        msg.innerHTML = "Enties can't be blank";
+                        
+                   
+                    }
+        
+                    else{
+                        let obj = JSON.parse('{"date":"' + date.value + '", "category":"' + category.value + '", "note":"' + note.value + '"}');
+                        console.log(obj);
+                        ipcRenderer.send("addinventory", obj)
+            
+                    msg.innerHTML = " successfully added ";
+                    }
                      this.connectedCallback();
                   })
-                  this.addIn(upreply,i);}
+                  this.addIn(upreply,i,msg,msg1);}
             
         })
     }
@@ -86,10 +128,11 @@ export class addInventory extends HTMLElement {
         <label for="" style="font-size:23px; margin-left:573px">Category</label>
         <br>
         <input type="text" class="fname" name="date" id="date">
-        <input type="text" class="fname" name="category" id="category" style="margin-left: 50px;">
+        <input type="text" class="fname" name="category" id="category" style="margin-left: 50px;" >
         <br><br><br>
         <input type="text" class="txt1" value="Note" size="88" id="note">
         <br>
+        <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
         <button id="done" style="margin-left:545px">ADD</button>
         </div>
 
@@ -109,6 +152,7 @@ export class addInventory extends HTMLElement {
         <br>
         
         <input type="text" class="fname" id="nPrice" name="nPrice" style="margin-left: 50px;">
+        <p style="color: #ff3860; margin-left:20px" id="invalid1"></p>
         <br>
         <button id="add" style="margin-left:545px">Done</button>
         

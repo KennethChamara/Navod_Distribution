@@ -12,6 +12,7 @@ export class addProduct extends HTMLElement {
     connectedCallback() {
 
         this.render()
+        const msg = this.shadowRoot.querySelector('#invalid');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const name = this.shadowRoot.querySelector('#name');
@@ -19,9 +20,21 @@ export class addProduct extends HTMLElement {
             const category = this.shadowRoot.querySelector('#category');
 
 
+          
+           
+            if (name.value==null || name.value==""||price.value==null || price.value=="" ||category.value==null || category.value==""){ 
+                
+                msg.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
             let obj = JSON.parse('{"name":"' + name.value + '", "price":"' + price.value + '", "category": "' + category.value + '"}');
             console.log(obj);
-            ipcRenderer.send("addProduct", obj)
+            ipcRenderer.send("addProduct", obj);
+            msg.innerHTML = " successfully added ";
+            }
 
         })
 
@@ -73,7 +86,7 @@ export class addProduct extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Category</h5>
             
             <input type="text" id="category" name="category"><br>
-
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
             
         </form>
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; margin-bottom:30px;"><b>Save</b></button>

@@ -12,6 +12,7 @@ export class addSalesRep extends HTMLElement {
     connectedCallback() {
 
         this.render()
+        const msg = this.shadowRoot.querySelector('#invalid');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const repId = this.shadowRoot.querySelector('#Rid');
@@ -19,9 +20,23 @@ export class addSalesRep extends HTMLElement {
             const adress = this.shadowRoot.querySelector('#adress');
             const contact = this.shadowRoot.querySelector('#contact');
 
-            let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("addSalesRep", obj)
+        
+
+            if (repId.value==null || repId.value==""||name.value==null || name.value=="" ||adress.value==null || adress.value==""||contact.value==null || contact.value==""){ 
+                
+                msg.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "adress": "' + adress.value + '", "contact": "' + contact.value + '"}');
+                console.log(obj);
+                ipcRenderer.send("addSalesRep", obj)
+    
+            msg.innerHTML = " successfully added ";
+            }
+
 
         })
 
@@ -76,7 +91,7 @@ export class addSalesRep extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Contact</h5>
             
             <input type="text" id="contact" name="contact"><br>
-
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
             
         </form>
         

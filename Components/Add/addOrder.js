@@ -12,6 +12,7 @@ export class addOrder extends HTMLElement {
     connectedCallback() {
 
         this.render()
+        const msg = this.shadowRoot.querySelector('#invalid');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const date = this.shadowRoot.querySelector('#date');
@@ -20,9 +21,22 @@ export class addOrder extends HTMLElement {
             const quantity = this.shadowRoot.querySelector('#quantity');
             const status = this.shadowRoot.querySelector('#status');
 
-            let obj = JSON.parse('{"date":"' + date.value + '", "shopid":"' + sid.value + '", "product": "' + product.value + '", "quantity": "' + quantity.value + '","status": "' + status.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("addOrder", obj)
+  
+
+            if (date.value==null || date.value==""||sid.value==null || sid.value=="" ||product.value==null || product.value==""||quantity.value==null || quantity.value==""||status.value==null || status.value==""){ 
+                
+                msg.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"date":"' + date.value + '", "shopid":"' + sid.value + '", "product": "' + product.value + '", "quantity": "' + quantity.value + '","status": "' + status.value + '"}');
+                console.log(obj);
+                ipcRenderer.send("addOrder", obj)
+    
+            msg.innerHTML = " successfully added ";
+            }
 
         })
 
@@ -79,10 +93,11 @@ export class addOrder extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Status</h5>
             
             <input type="text" id="status" name="status"><br>
+            <p style="color: #ff3860; margin-left:20px; margin-top: 2px;" id="invalid"></p>
         </form>
-        
-        <button style="background-color:rgba(255, 68, 68, 1);margin-left: 490px;"><b>Cancel</b></button>
-        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 20px; margin-bottom:30px;"><b>Save</b></button>`;
+       
+        <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 620px; margin-bottom:30px;"><b>Save</b></button> 
+        <button style="background-color:rgba(255, 68, 68, 1);  margin-left: 8px;"><b>Cancel</b></button>`;
 
     }
 

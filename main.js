@@ -564,6 +564,18 @@ ipcMain.on('inventory', (event, payment_id) => {
 
     });
 });
+
+ipcMain.on('stock', (event, payment_id) => {
+    var sql = "select * from navode.stock order by s_id DESC LIMIT 1 ";
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
+    });
+});
 //product analysis
 //doughnut chart
 ipcMain.on('productAnalysis', (event, args) => {

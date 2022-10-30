@@ -12,6 +12,7 @@ export class addPayment extends HTMLElement {
     connectedCallback() {
 
         this.render()
+        const msg = this.shadowRoot.querySelector('#invalid');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const Ino = this.shadowRoot.querySelector('#Ino');
@@ -20,9 +21,22 @@ export class addPayment extends HTMLElement {
             const status = this.shadowRoot.querySelector('#status');
             const customer = this.shadowRoot.querySelector('#customer');
 
-            let obj = JSON.parse('{"Ino":"' + Ino.value + '", "amount":"' + amount.value + '", "chequeNo": "' + chequeNo.value + '", "status": "' + status.value + '", "customer": "' + customer.value + '"}');
-            console.log(obj);
-            ipcRenderer.send("addPayment", obj)
+       
+
+            if (Ino.value==null || Ino.value==""||amount.value==null || amount.value=="" ||chequeNo.value==null || chequeNo.value==""||status.value==null || status.value=="" || customer.value==null || customer.value==""){ 
+                
+                msg.innerHTML = "Enties can't be blank";
+                
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"Ino":"' + Ino.value + '", "amount":"' + amount.value + '", "chequeNo": "' + chequeNo.value + '", "status": "' + status.value + '", "customer": "' + customer.value + '"}');
+                console.log(obj);
+                ipcRenderer.send("addPayment", obj)
+    
+            msg.innerHTML = " successfully added ";
+            }
 
         })
 
@@ -82,6 +96,7 @@ export class addPayment extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Customer</h5>
             
             <input type="text" id="customer" name="customer"><br>
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; margin-bottom:30px;"><b>Save</b></button>
