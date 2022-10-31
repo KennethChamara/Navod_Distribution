@@ -631,7 +631,7 @@ ipcMain.on('bar', (event, args) => {
 
 ipcMain.on("addinventory", (event, obj) => {
         
-    var sql = "INSERT INTO stock (date, category, note) VALUES ('" + obj.date + "','" + obj.category + "','" + obj.note + "')";
+    var sql = "INSERT INTO navode.stock (date, category, note) VALUES ('" + obj.date + "','" + obj.category + "','" + obj.note + "')";
     connection.query(sql, function(err, result) {
         if (err) throw err;
         console.log("1 record inserted");
@@ -641,7 +641,7 @@ ipcMain.on("addinventory", (event, obj) => {
 })
 ipcMain.on("InventoryManagement", (event, obj) => {
         
-    var sql = "INSERT INTO inventory (s_id,p_id,quantity) VALUES ('" + obj.s_id + "','" + obj.p_id + "','" + obj.quantity + "')";
+    var sql = "INSERT INTO navode.inventory (s_id,p_id,quantity) VALUES ('" + obj.s_id + "','" + obj.p_id + "','" + obj.quantity + "')";
     connection.query(sql, function(err, result) {
         if (err) throw err;
         console.log("1 record inserted");
@@ -652,6 +652,7 @@ ipcMain.on("InventoryManagement", (event, obj) => {
 
 ipcMain.on('productamount', (event, payment_id) => {
     var sql = "SELECT * FROM navode.product";
+   
    
     connection.query(sql, function(err, rows, fields) {
        
