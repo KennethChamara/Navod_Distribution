@@ -42,6 +42,7 @@ export class addInventory extends HTMLElement {
         })
 
        this.addIn(upreply,i,msg,msg1);
+
     }    
 
         addIn(upreply,i,msg,msg1){

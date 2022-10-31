@@ -11,10 +11,27 @@ export class salesReport extends HTMLElement {
 
     connectedCallback() {
 
-        this.render();
+        
         let reply = ipcRenderer.sendSync('inoiceReport', 2022);
         let reValue = ipcRenderer.sendSync('returnValue', 2022);
+        let sales = ipcRenderer.sendSync('salesReport', 'a string');
+        
+        let total=0;
+        
+        for(let i=0;i<reply.length;i++){
+            total +=reply[i].value
+        }
 
+        let profit=(total*7)/100
+
+        let LMIncome=sales[2].value
+        let differance=profit-(LMIncome*7)/100
+        
+        
+
+        this.render(profit,total,LMIncome,differance)
+        
+        
         const table = this.shadowRoot.querySelector('#tbl');
 
         for (let i = 0; i < reply.length; i++) {
@@ -27,13 +44,16 @@ export class salesReport extends HTMLElement {
             row.insertCell(3).innerHTML = reValue[i].value;
             row.insertCell(4).innerHTML = (reply[i].value * 7) / 100;
 
+            
+
 
 
         }
-
+        
+        
     }
 
-    render() {
+    render(profit,total,LMIncome,differance) {
         this.shadowRoot.innerHTML += `
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
@@ -68,21 +88,21 @@ export class salesReport extends HTMLElement {
             <sales-chart></sales-chart>
         </div>
         <br>
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-7" style="font-size:10px; text-align: left;">
+        <div class="row" id="s1">
+            <div class="col-2"></div>
+            <div class="col-5" style="font-size:10px; text-align: left;">
                <p>Monthly Income By Selling</p>
                <p>Monthly Profit</p>
                <p>Last Month Income</p>
                <p>Profit Differance</p> 
             </div>
-            <div class="col-2" style="font-size:10px; text-align: right;">
-                <p>12 000 000</p>
-                <p>700 000</p>
-                <p>650 000</p>
-                <p>50 000</p>
+            <div class="col-3" style="font-size:10px; text-align: right;">
+                <p>`+total+`</p>
+                <p>`+profit+`</p>
+                <p>`+LMIncome+`</p>
+                <p>`+differance+`</p>
             </div>
-            <div class="col-2"></div>
+            <div class="col-1"></div>
 
         </div>
     </div>

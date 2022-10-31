@@ -38,9 +38,17 @@ export class viewOrder extends HTMLElement {
                 const tb = this.shadowRoot.querySelector('#tb');
 
 
-                ipcRenderer.send("deleteOrder", reply[i].o_id)
-                tb.remove()
-
+                const response=ipcRenderer.send("deleteOrder", reply[i].o_id)
+                if(response){
+                    tb.remove();
+                    console.log("records deleted");
+                }else{ 
+                    tb.remove();
+                    console.log("can't delete order");
+                    alert("can't delete order");
+                }
+                
+                
                 this.connectedCallback()
 
 
