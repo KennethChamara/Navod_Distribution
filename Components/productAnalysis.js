@@ -106,12 +106,18 @@ export class productAnalysis extends HTMLElement {
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="Components/repA.css">
+        <script>
+        ::placeholder {
+            color: black;
+            opacity: 1; /* Firefox */
+          }
+        </script>
         <div class="container">
         <div class="row">
             
             <div class="col-4 ">
                 
-                <input list="browsers1" name="year" id="year"  style="width:80%;background-color: #DBC4F0" value="` + y + `">
+                <input list="browsers1" name="year" id="year"  style="width:80%;background-color: #DBC4F0;" placeholder="` + y + `">
                 <datalist id="browsers1">
                 <option value="2018">
                 <option value="2019">
@@ -123,7 +129,7 @@ export class productAnalysis extends HTMLElement {
             </div>
             <div class="col-4 ">
                 
-                <input list="browsers" name="month" id="month" style="background-color: #2BAEE5;" value="` + m1 + `">
+                <input list="browsers" name="month" id="month" style="background-color: #2BAEE5;" placeholder="` + m1 + `">
                 <datalist id="browsers">
                   <option value="January">
                   <option value="February">
@@ -147,7 +153,7 @@ export class productAnalysis extends HTMLElement {
             </div>
             <div class="col-1 ">
                 
-                    <button id="submit" class="b1" style="background-color: #DFEC90 "></button>
+                    <button id="submit" class="b1" style="background-color: #DFEC90; font-size:35px; border-radius:25px">+</button>
                 
             </div>
         </div>
