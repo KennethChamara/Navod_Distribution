@@ -13,6 +13,8 @@ export class updatecustomer extends HTMLElement {
 
         var upreply = ipcRenderer.sendSync('updatecustomer', this.getAttribute("customer_id"));
         this.render(upreply);
+        const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const fn = this.shadowRoot.querySelector('#fname');
@@ -20,11 +22,27 @@ export class updatecustomer extends HTMLElement {
             const cn = this.shadowRoot.querySelector('#cNo');
             const r = this.shadowRoot.querySelector('#route');
 
-            let obj = JSON.parse('{"fname":"' + fn.value + '", "lname":"' + ln.value + '", "contactNo": "' + cn.value + '", "route": "' + r.value + '"}');
-            obj.id=upreply[0].customer_id;
-            console.log(obj.id);
-            ipcRenderer.send("updatecustomeriteam", obj);
-            document.getElementById("main-body").innerHTML = "<view-customer></view-customer>";
+          
+            if (fn.value==null || fn.value==""||ln.value==null || ln.value=="" ||cn.value==null || cn.value==""||r.value==null || r.value==""){ 
+                
+                
+  
+            msg.innerHTML = "Enties can't be blank";
+            msgg.innerHTML = "  ";   
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"fname":"' + fn.value + '", "lname":"' + ln.value + '", "contactNo": "' + cn.value + '", "route": "' + r.value + '"}');
+                obj.id=upreply[0].customer_id;
+                console.log(obj.id);
+                ipcRenderer.send("updatecustomeriteam", obj);
+                document.getElementById("main-body").innerHTML = "<view-customer></view-customer>";
+    
+    
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
+            }
 
         })
 
@@ -64,7 +82,7 @@ export class updatecustomer extends HTMLElement {
             <img src="images/customers-icon-3.png" width="50px" height="50px" style="margin-left: 170px; margin-top: 20px;">
             <h5 for="name" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);"> Name</h5>
             
-            <input type="text" id="fname" name="fname" value="`+upreply[0].customer_id+`"><br>
+            <input type="text" id="fname" name="fname" value="`+upreply[0].name+`"><br>
            
             <h5 for="price" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Address</h5>
             
@@ -77,6 +95,8 @@ export class updatecustomer extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Route</h5>
             
             <input type="text" id="route" name="lname" value="`+upreply[0].route+`"><br>
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; "><b>Save</b></button>

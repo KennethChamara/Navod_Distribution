@@ -15,6 +15,8 @@ export class updatepayment extends HTMLElement {
         
         
         this.render(upreply);
+        const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
           
@@ -23,12 +25,29 @@ export class updatepayment extends HTMLElement {
             const cheque = this.shadowRoot.querySelector('#quantity');
             const status = this.shadowRoot.querySelector('#description');
 
-            let obj = JSON.parse('{"invoice": "' + invoice.value + '","amount": "' + amount.value + '", "cheque": "' + cheque.value + '","status": "' + status.value + '"}');
-            obj.payment_id = upreply[0].payment_id;
-            
-            console.log(obj);
-            ipcRenderer.send("updatepayment1", obj);
-            document.getElementById("main-body").innerHTML = "<view-payment></view-payment>";
+           
+
+            if (invoice.value==null || invoice.value==""||amount.value==null || amount.value=="" ||cheque.value==null || cheque.value==""||status.value==null || status.value==""){ 
+                
+               
+                msg.innerHTML = "Enties can't be blank";
+                msgg.innerHTML = "  ";   
+                
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"invoice": "' + invoice.value + '","amount": "' + amount.value + '", "cheque": "' + cheque.value + '","status": "' + status.value + '"}');
+                obj.payment_id = upreply[0].payment_id;
+                
+                console.log(obj);
+                ipcRenderer.send("updatepayment1", obj);
+                document.getElementById("main-body").innerHTML = "<view-payment></view-payment>";
+
+    
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
+            }
 
         })
 
@@ -82,6 +101,8 @@ export class updatepayment extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Status</h5>
             
             <input type="text" id="description" name="status" value="` + upreply[0].status + `"><br>
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         

@@ -13,6 +13,7 @@ export class addPayment extends HTMLElement {
 
         this.render()
         const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const Ino = this.shadowRoot.querySelector('#Ino');
@@ -26,6 +27,7 @@ export class addPayment extends HTMLElement {
             if (Ino.value==null || Ino.value==""||amount.value==null || amount.value=="" ||chequeNo.value==null || chequeNo.value==""||status.value==null || status.value=="" || customer.value==null || customer.value==""){ 
                 
                 msg.innerHTML = "Enties can't be blank";
+                msgg.innerHTML = "  ";
                 
            
             }
@@ -35,7 +37,8 @@ export class addPayment extends HTMLElement {
                 console.log(obj);
                 ipcRenderer.send("addPayment", obj)
     
-            msg.innerHTML = " successfully added ";
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
             }
 
         })
@@ -97,6 +100,7 @@ export class addPayment extends HTMLElement {
             
             <input type="text" id="customer" name="customer"><br>
             <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; margin-bottom:30px;"><b>Save</b></button>

@@ -12,6 +12,8 @@ export class updaterep extends HTMLElement {
     connectedCallback() {
         var upreply = ipcRenderer.sendSync('updaterep', this.getAttribute("rep_id"));
         this.render(upreply);
+        const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const repId = this.shadowRoot.querySelector('#Rid');
@@ -19,11 +21,26 @@ export class updaterep extends HTMLElement {
             const adress = this.shadowRoot.querySelector('#adress');
             const contact = this.shadowRoot.querySelector('#contact');
            
-            let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "address": "' + adress.value + '", "phone": "' + contact.value + '"}');
-            obj.id=upreply[0].rep_id;
-            
-            ipcRenderer.send("updaterepiteam", obj);
-            document.getElementById("main-body").innerHTML = "<view-sales-rep></view-sales-rep>";
+           
+
+            if (repId.value==null || repId.value==""||name.value==null || name.value=="" ||adress.value==null || adress.value==""||contact.value==null || contact.value==""){ 
+                
+                
+                msg.innerHTML = "Enties can't be blank";
+                msgg.innerHTML = "  ";   
+           
+            }
+
+            else{
+                let obj = JSON.parse('{"repId":"' + repId.value + '", "name":"' + name.value + '", "address": "' + adress.value + '", "phone": "' + contact.value + '"}');
+                obj.id=upreply[0].rep_id;
+                
+                ipcRenderer.send("updaterepiteam", obj);
+                document.getElementById("main-body").innerHTML = "<view-sales-rep></view-sales-rep>";
+    
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
+            }
 
         })
 
@@ -77,8 +94,8 @@ export class updaterep extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Contact</h5>
             
             <input type="text" id="contact" name="contact" value="`+upreply[0].phone+`"><br>
-
-            
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; margin-bottom:30px;"><b>Save</b></button>

@@ -13,6 +13,7 @@ export class addSalesRep extends HTMLElement {
 
         this.render()
         const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const repId = this.shadowRoot.querySelector('#Rid');
@@ -25,7 +26,7 @@ export class addSalesRep extends HTMLElement {
             if (repId.value==null || repId.value==""||name.value==null || name.value=="" ||adress.value==null || adress.value==""||contact.value==null || contact.value==""){ 
                 
                 msg.innerHTML = "Enties can't be blank";
-                
+                msgg.innerHTML = "  ";
            
             }
 
@@ -34,7 +35,8 @@ export class addSalesRep extends HTMLElement {
                 console.log(obj);
                 ipcRenderer.send("addSalesRep", obj)
     
-            msg.innerHTML = " successfully added ";
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
             }
 
 
@@ -92,7 +94,7 @@ export class addSalesRep extends HTMLElement {
             
             <input type="text" id="contact" name="contact"><br>
             <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
-            
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 500px; margin-bottom: 490px;"><b>Save</b></button>

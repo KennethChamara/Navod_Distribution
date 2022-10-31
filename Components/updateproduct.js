@@ -11,9 +11,11 @@ export class updateproduct extends HTMLElement {
 
     connectedCallback() {
 
-        const msg = this.shadowRoot.querySelector('#invalid');
+        
         var upreply = ipcRenderer.sendSync('updateproduct', this.getAttribute("p_id"));
         this.render(upreply);
+        const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         console.log(upreply[0].pname);
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
@@ -22,12 +24,27 @@ export class updateproduct extends HTMLElement {
             const category = this.shadowRoot.querySelector('#category');
 
   
+               
+
+                if (name.value==null || name.value==""||price.value==null || price.value=="" ||category.value==null || category.value==""){ 
+                
+                   
+                    msg.innerHTML = "Enties can't be blank";
+                    msgg.innerHTML = "  ";   
+                    
+               
+                }
+    
+                else{
                 let obj = JSON.parse('{"name":"' + name.value + '", "price":"' + price.value + '", "category": "' + category.value + '"}');
                 obj.id = upreply[0].p_id;
                 console.log(obj.id);
                 ipcRenderer.send("updateproductiteam", obj);
                 document.getElementById("main-body").innerHTML = "<view-product></view-product>";
-
+        
+                msgg.innerHTML = " successfully added ";
+                msg.innerHTML = " ";
+                }
 
         })
 
@@ -80,7 +97,7 @@ export class updateproduct extends HTMLElement {
             
             <input type="text" id="category" name="category"; value="` + upreply[0].category + `"><br>
             <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
-            
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px ; margin-bottom:30px;"><b>Save</b></button>

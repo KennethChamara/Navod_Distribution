@@ -127,7 +127,7 @@ export class addInventory extends HTMLElement {
         <label for="" style="font-size:23px;">Date</label>
         <label for="" style="font-size:23px; margin-left:573px">Category</label>
         <br>
-        <input type="text" class="fname" name="date" id="date">
+        <input type="date" class="fname" name="date" id="date" style="background-color: rgba(250, 238, 210, 1); width: 555px; height: 36px; border-color:rgba(128, 128, 128, 1);">
         <input type="text" class="fname" name="category" id="category" style="margin-left: 50px;" >
         <br><br><br>
         <input type="text" class="txt1" value="Note" size="88" id="note">

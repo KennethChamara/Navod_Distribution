@@ -13,6 +13,7 @@ export class addCustomer extends HTMLElement {
 
         this.render()
         const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
             const fn = this.shadowRoot.querySelector('#fname');
@@ -27,7 +28,7 @@ export class addCustomer extends HTMLElement {
             if (fn.value==null || fn.value==""||ln.value==null || ln.value=="" ||cn.value==null || cn.value==""||r.value==null || r.value==""){ 
                 
                 msg.innerHTML = "Enties can't be blank";
-                
+                msgg.innerHTML = "  ";
            
             }
 
@@ -36,7 +37,8 @@ export class addCustomer extends HTMLElement {
                 console.log(obj);
                 ipcRenderer.send("addCustomer", obj)
     
-            msg.innerHTML = " successfully added ";
+            msgg.innerHTML = " successfully added ";
+            msg.innerHTML = " ";
             }
 
 
@@ -92,6 +94,7 @@ export class addCustomer extends HTMLElement {
             
             <input type="text" id="route" name="lname"><br>
             <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         <button id="save" style="background-color:rgba(0, 200, 81, 1); margin-left: 490px; "><b>Save</b></button>
