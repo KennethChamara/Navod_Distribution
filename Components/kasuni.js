@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-export class viewProduct extends HTMLElement {
+export class kasuni extends HTMLElement {
     constructor() {
         super();
 
@@ -10,9 +10,12 @@ export class viewProduct extends HTMLElement {
     }
 
     connectedCallback() {
-        let reply = ipcRenderer.sendSync('viewProduct', 'a string');
-
+        let reply = ipcRenderer.sendSync('im', 'a string');
+        console.log(reply[0].name)
         const na = reply;
+
+
+
 
         this.render()
         const table = this.shadowRoot.querySelector('#jana');
@@ -20,35 +23,40 @@ export class viewProduct extends HTMLElement {
         for (let i = 0; i < reply.length; i++) {
             const row = table.insertRow(i + 1);
 
+
             row.insertCell(0).innerHTML = reply[i].pname;
             row.insertCell(1).innerHTML = reply[i].price;
             row.insertCell(2).innerHTML = reply[i].category;
-            row.insertCell(3).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(4).innerHTML = `<a onclick='updateproduct(${reply[i].p_id})'><img src='images/icons8-update-48.png' style="width:12%; height:12%;"></a>`;
+            row.insertCell(3).innerHTML = reply[i].quantity;
+            row.insertCell(4).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
 
             const dele = this.shadowRoot.querySelector('#del' + i);
             dele.addEventListener('click', () => {
                 const tb = this.shadowRoot.querySelector('#tb');
-
-                const response= ipcRenderer.sendSync("deleteProduct", reply[i].p_id)
-                console.log("records delete status",response);
-                if(response){
-                    tb.remove();
-                    console.log("records deleted");
-                }else{ 
-                    tb.remove();
-                    console.log("can't delete product");
-                    alert("can't delete product");
-                }
+                let obj = JSON.parse('{"p_id": ' + reply[i].p_id + ',"s_id":' + reply[i].s_id + '}');
+                console.log(obj)
+                ipcRenderer.send("imdelete", obj)
+                tb.remove()
 
                 this.connectedCallback()
+
+
+
 
             })
 
 
-        }
 
+
+
+
+        }
 }
+
+
+
+
+
 
     render() {
 
@@ -58,7 +66,7 @@ export class viewProduct extends HTMLElement {
            
         
      <div id="tb">
-        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Product/View Product</p>
+        <p style="margin-left: -110px; margin-top:10px"><a onClick="first()" style="cursor: pointer;">Home</a>/Inventory/Inventary Management</p>
         <br>  
 
         <div class="tbl" id="tb">
@@ -68,19 +76,14 @@ export class viewProduct extends HTMLElement {
             <table id="jana">
             <tr>
                 
-                <th>Name</th>
-                <th style="padding-right:5px">Price</th>
-                <th>Cateogory</th>
+               
                 <th></th>
-                <th></th>
+                
                 
             </tr>
 
            
-        </table>
-        
-
-        
+        </table>       
 
 
     </div>
@@ -92,7 +95,6 @@ export class viewProduct extends HTMLElement {
 
     }
 
-
 }
 
-customElements.define('view-product', viewProduct)
+customElements.define('kas-uni', kasuni)

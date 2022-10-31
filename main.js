@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '12345', // or the original password : 'apaswword'
+    password: '', // or the original password : 'apaswword'
     database: 'navode'
 });
 
@@ -137,8 +137,8 @@ ipcMain.on('imdelete', (event, id) => {
 
     var sql = "DELETE FROM navode.inventory WHERE s_id =" + id.s_id + " and p_id =" + id.p_id;
     connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log("Number of records deleted: " + result.affectedRows);
+        console.log("Number of records deleted: " + result?.affectedRows);
+        event.returnValue = err?false:true;
     });
     console.log(id.s_id)
 
@@ -184,8 +184,8 @@ ipcMain.on('deleteOrder', (event, id) => {
 
         var sql = "DELETE FROM navode.order WHERE o_id =" + id;
         connection.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log("Number of records deleted: " + result.affectedRows);
+            console.log("Number of records deleted: " + result?.affectedRows);
+            event.returnValue = err?false:true;
         });
         console.log(id)
 
@@ -233,11 +233,10 @@ ipcMain.on('deleteSalesRep', (event, id) => {
 
         var sql = "DELETE FROM navode.rep WHERE rep_id =" + id;
         connection.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log("Number of records deleted: " + result.affectedRows);
+            console.log("Number of records deleted: " + result?.affectedRows);
+            event.returnValue = err?false:true;
         });
-        console.log(id)
-
+        
     })
     //view customer
 ipcMain.on('viewCustomer', (event, args) => {
@@ -270,8 +269,10 @@ ipcMain.on('deleteCustomer', (event, id) => {
 
     var sql = "DELETE FROM navode.customer_shop WHERE customer_id =" +id;
     connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log("Number of records deleted: " + result.affectedRows);
+        console.log("Number of records deleted: " + result?.affectedRows);
+        
+        
+        event.returnValue = err?false:true;
     });
     console.log(id)
 
@@ -282,8 +283,9 @@ ipcMain.on('deletepayment', (event, payment_id) => {
 console.log(payment_id)
     var sql = "DELETE FROM navode.payment WHERE payment_id ="+payment_id;
     connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log("Number of records deleted: " + result.affectedRows);
+        console.log("Number of records deleted: " + result?.affectedRows);
+        console.log(err?false:true)
+        event.returnValue = 'jana';
     });
     
 
@@ -308,8 +310,8 @@ ipcMain.on('deleteReturn', (event, id) => {
     console.log(id.c_id)
     var sql = "DELETE FROM navode.returns WHERE date='" + id.date + "' and customer_id=" + id.c_id + " and p_id =" + id.p_id;
     connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log("Number of records deleted: " + result.affectedRows);
+        console.log("Number of records deleted: " + result?.affectedRows);
+        event.returnValue = err?false:true;
     });
 
 
@@ -558,6 +560,10 @@ ipcMain.on('inventory', (event, payment_id) => {
     connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         console.log("1 record inserted");
+
+        event.returnValue = rows;
+
+
     });
 });
 //product analysis
@@ -586,6 +592,10 @@ ipcMain.on('stock', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
+
+        event.returnValue = rows;
+
+
     });
 });
 //bar chart
@@ -636,6 +646,10 @@ ipcMain.on('productamount', (event, payment_id) => {
        
         if (err) throw err;
         console.log("1 record is selected");
+
+        event.returnValue = rows;
+
+
     });
 });
 ipcMain.on('profit', (event, args) => {
@@ -755,6 +769,8 @@ ipcMain.on('logIn', (event, args) => {
     // var sqlName = "select name from navode.user where name='"+args.user+"' and password='"+args.password+"'";
     var sqlName = "select name,password from navode.user where name='"+args.name+"'";
     connection.query(sqlName, function(err, rows) {
+        
+        console.log(rows[0].name);
         if (err) throw err;
         
         if(rows.length != 0){
@@ -770,4 +786,20 @@ ipcMain.on('logIn', (event, args) => {
         
     });
     
+});
+
+
+
+ipcMain.on('profit', (event, args) => {
+
+   var sql = "select * from navode.product as p,navode.order_product as op,navode.order as o where (op.o_id = o.o_id and p.p_id = op.p_id) and month(date)=11";
+    
+    connection.query(sql, function(err, rows, fields) {
+        if (err) throw err;
+        console.log("1 record");
+
+        event.returnValue = rows;
+
+
+    });
 });

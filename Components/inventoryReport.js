@@ -11,11 +11,22 @@ export class inventoryReport extends HTMLElement {
 
     connectedCallback() {
 
-        this.render();
+        
         let reply = ipcRenderer.sendSync('inventoryChart', 2022);
         let reply1 = ipcRenderer.sendSync('inoiceReport', 2022);
         let reply2 = ipcRenderer.sendSync('returnReport', 2022);
+       
+        console.log(reply1[0].value)
+        let total=0;
+        for(let i=0;i<reply1.length;i++){
+            total+=reply1[i].value;
+        }
 
+        let profit=(total*7)/100
+        let expencess=total-profit
+
+
+        this.render(profit,expencess,total);
         const table = this.shadowRoot.querySelector('#tbl');
 
         for (let i = 0; i < reply.length; i++) {
@@ -33,7 +44,7 @@ export class inventoryReport extends HTMLElement {
         console.log(reply)
     }
 
-    render() {
+    render(profit,expencess,total) {
         this.shadowRoot.innerHTML += `
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
@@ -76,10 +87,10 @@ export class inventoryReport extends HTMLElement {
                <p>Target Sells</p> 
             </div>
             <div class="col-3" style="font-size:10px; text-align: right;">
-                <p>12 000 000</p>
-                <p>700 000</p>
-                <p>650 000</p>
-                <p>50 000</p>
+                <p>`+profit+`</p>
+                <p>`+expencess+`</p>
+                <p>`+total+`</p>
+                <p>2000 000</p>
             </div>
             <div class="col-3"></div>
 
