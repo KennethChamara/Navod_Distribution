@@ -16,7 +16,9 @@ export class addInventory extends HTMLElement {
         //var getid = ipcRenderer.sendSync('stock', 'string');
         this.render(upreply,i)
         const msg = this.shadowRoot.querySelector('#invalid');
+        const msgg = this.shadowRoot.querySelector('#invalidd');
         const msg1 = this.shadowRoot.querySelector('#invalid1');
+        const msgg1 = this.shadowRoot.querySelector('#invalidd1');
         const done = this.shadowRoot.querySelector('#done');
        done.addEventListener('click', () => {
             const date = this.shadowRoot.querySelector('#date');
@@ -27,7 +29,7 @@ export class addInventory extends HTMLElement {
             if (date.value==null || date.value==""||category.value==null || category.value=="" ||note.value==null || note.value==""){ 
                 
                 msg.innerHTML = "Enties can't be blank";
-                
+                msgg.innerHTML = "";
            
             }
 
@@ -37,7 +39,8 @@ export class addInventory extends HTMLElement {
                 ipcRenderer.send("addinventory", obj)
                 /*getid = ipcRenderer.sendSync('stock', 'string');
                 this.render(upreply,i)*/
-            msg.innerHTML = " successfully added ";
+                msg.innerHTML = "";    
+                msgg.innerHTML = " successfully added ";
             }
         })
 
@@ -72,6 +75,7 @@ export class addInventory extends HTMLElement {
             if (quantity.value==null || quantity.value==""){ 
                 
                 msg1.innerHTML = "Enties can't be blank";
+                msgg1.innerHTML="";
                 
            
             }
@@ -80,7 +84,8 @@ export class addInventory extends HTMLElement {
             let obj = JSON.parse('{"name":"' + name.value + '",  "quantity": "' + quantity.value + '",  "s_id": "' + stock[0].s_id + '", "p_id": "' + upreply[i-1].p_id + '"}');
             ipcRenderer.send("InventoryManagement", obj)
             this.render(upreply,i);
-            msg1.innerHTML = " successfully added ";
+            msg1.innerHTML = " ";
+            msgg1.innerHTML="successfully added ";
             }
 
 
@@ -107,7 +112,9 @@ export class addInventory extends HTMLElement {
                     }
                      this.connectedCallback();
                   })
-                  this.addIn(upreply,i,msg,msg1);}
+                  this.addIn(upreply,i,msg,msg1);
+                }
+             
             
         })
     }
@@ -134,6 +141,7 @@ export class addInventory extends HTMLElement {
         <input type="text" class="txt1" value="Note" size="88" id="note">
         <br>
         <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+        <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         <button id="done" style="margin-left:545px">ADD</button>
         </div>
 
@@ -154,6 +162,7 @@ export class addInventory extends HTMLElement {
         
         <input type="text" class="fname" id="nPrice" name="nPrice" style="margin-left: 50px;">
         <p style="color: #ff3860; margin-left:20px" id="invalid1"></p>
+        <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd1"></p>
         <br>
         <button id="add" style="margin-left:545px">Done</button>
         
