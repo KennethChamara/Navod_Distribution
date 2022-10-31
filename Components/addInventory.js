@@ -26,7 +26,7 @@ export class addInventory extends HTMLElement {
             ipcRenderer.send("addinventory", obj)
         })
 
-        this.addIn(upreply,i);
+       this.addIn(upreply,i);
     }    
 
         addIn(upreply,i){

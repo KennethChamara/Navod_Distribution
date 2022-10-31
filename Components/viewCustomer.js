@@ -36,11 +36,18 @@ export class viewCustomer extends HTMLElement {
                 const tb = this.shadowRoot.querySelector('#tb');
 
 
-                ipcRenderer.send("deleteCustomer", reply[i].customer_id)
-                tb.remove()
-
+                const response=ipcRenderer.send("deleteCustomer", reply[i].customer_id)
+                if(response){
+                    tb.remove();
+                    console.log("records deleted");
+                }else{ 
+                    tb.remove();
+                    console.log("can't delete Customer");
+                    alert("can't delete Customer");
+                }
+                
+                console.log("%%%%%%")
                 this.connectedCallback()
-
 
 
 
