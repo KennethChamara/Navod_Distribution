@@ -22,7 +22,7 @@
     <header>
 
         <div class="sidebar">
-            <a onclick="addOrder()"><img src=" images\customers-icon-3.png " alt=" " style="width: 40px; height:40px; "></a>
+            <a onclick="addOrder()"><img src=" images\icons8-purchase-order-50.png  " alt=" " style="width: 50px; height:50px; "></a>
             <a><img src="images\analytics-circle-green-512.webp " alt=" " style="width: 40px; height:40px; "></a>
             <a><img src="images\red_shoppictbasket_1484336512-1.png " alt=" " style="width: 40px; height:40px; "></a>
             <a onclick="inventoryManagement()"><img src="images\micro-distribution-inventory-svg-png-icon-free-download-inventory-icon-flat-png-free-transparent-png-clipart-images-download.png " alt=" " style="width: 40px; height:40px; "></a>
@@ -34,8 +34,8 @@
         <!-- BurgerMenu -->
         <div id="myLinks">
             <div class="sidebar" style="width:260px;">
-                <a><img src=" images\customers-icon-3.png " alt=" " style="width: 40px; height:40px; ">
-                    <p class="para " style="display: inline-block; margin:20px "> Agent</p>
+                <a><img src="images\icons8-purchase-order-50.png " alt=" " style="width: 50px; height:50px; ">
+                    <p onclick="addOrder()" class="para " style="display: inline-block; margin:20px "> Order</p>
                 </a>
 
                 <button class="dropdown-btn " style="box-shadow: none; "><img src="images\analytics-circle-green-512.webp " alt=" " style="width: 40px; height:40px; ">
@@ -157,31 +157,32 @@
     </main>
     <!--Main layout-->
     <script>
-        function updateproduct(p_id) {
+    function updateproduct(p_id) {
     document.getElementById("main-body").innerHTML = `<update-product p_id="${p_id}""></update-product>`;
     document.getElementById("myLinks").style.display = "none";
 }
 
-function updatecustomer(customer_id) {
+    function updatecustomer(customer_id) {
     document.getElementById("main-body").innerHTML = `<update-customer customer_id="${customer_id}"></update-customer>`;
     document.getElementById("myLinks").style.display = "none";
 }
 
-function updateorder(o_id) {
+    function updateorder(o_id) {
     document.getElementById("main-body").innerHTML = `<update-order o_id="${o_id}"></update-order>`;
     document.getElementById("myLinks").style.display = "none";
 }
 
-function updaterep(rep_id) {
+    function updaterep(rep_id) {
     document.getElementById("main-body").innerHTML = `<update-rep rep_id="${rep_id}"></update-rep>`;
     document.getElementById("myLinks").style.display = "none";
 }
-function updatereturns(p_id, customer_id, date) {
+    function updatereturns(p_id, customer_id, date) {
             document.getElementById("main-body").innerHTML = `<update-returns p_id="${p_id}" customer_id="${customer_id}" date="${date}"></update-returns>`;
 }
 function updatepayment(payment_id) {
             document.getElementById("main-body").innerHTML = `<update-payment payment_id="${payment_id}"></update-payment>`;
 }
+
 
     </script>
     <script src="js/burgerMenu.js"></script>

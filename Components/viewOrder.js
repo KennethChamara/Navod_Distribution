@@ -11,7 +11,7 @@ export class viewOrder extends HTMLElement {
 
     connectedCallback() {
         let reply = ipcRenderer.sendSync('viewOrder', 'a string');
-        console.log(reply[0].name)
+        
         const na = reply;
 
 
