@@ -39,9 +39,14 @@ export class viewpayment extends HTMLElement {
                 const tb = this.shadowRoot.querySelector('#tb');
 
 
-                ipcRenderer.send("deletepayment", reply[i].payment_id)
-                tb.remove()
-
+                const response=ipcRenderer.send("deletepayment", reply[i].payment_id)
+                console.log(response)
+                
+                    tb.remove();
+                    console.log("records deleted");
+                
+                
+                
                 this.connectedCallback()
 
 

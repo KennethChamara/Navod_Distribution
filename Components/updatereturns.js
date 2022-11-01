@@ -12,10 +12,13 @@ export class updatereturns extends HTMLElement {
     connectedCallback() {
 
         var upreply = ipcRenderer.sendSync('updatereturns', this.getAttribute("p_id"), this.getAttribute("customer_id"), this.getAttribute("date"));
+        console.log(upreply);
         var upcus = ipcRenderer.sendSync('selectcustomer', upreply[0].customer_id);
         var upcus1 = ipcRenderer.sendSync('selectcustomer1',upreply[0].p_id);
         console.log(upreply[0].customer_id);
         this.render(upreply,upcus,upcus1);
+        const msgg = this.shadowRoot.querySelector('#invalidd');
+        const msg = this.shadowRoot.querySelector('#invalid');
         const submit = this.shadowRoot.querySelector('#save');
         submit.addEventListener('click', () => {
           
@@ -24,12 +27,27 @@ export class updatereturns extends HTMLElement {
             const quantity = this.shadowRoot.querySelector('#quantity');
             const description = this.shadowRoot.querySelector('#description');
 
-            let obj = JSON.parse('{"date": "' + date.value + '","mfcDate": "' + mfcDate.value + '", "quantity": "' + quantity.value + '","description": "' + description.value + '"}');
+           
+
+            if (date.value==null || date.value==""||mfcDate.value==null || mfcDate.value=="" ||quantity.value==null || quantity.value==""||description.value==null || description.value==""){ 
+                
+               
+                msg.innerHTML = "Enties can't be blank";
+                msgg.innerHTML = "  ";   
+            }
+
+            else{
+                let obj = JSON.parse('{"date": "' + date.value + '","mfcDate": "' + mfcDate.value + '", "quantity": "' + quantity.value + '","description": "' + description.value + '"}');
             obj.p_id = upreply[0].p_id;
             obj.customer_id = upreply[0].customer_id;
             console.log(obj);
             ipcRenderer.send("updatereturniteam", obj);
             document.getElementById("main-body").innerHTML = "<return-item></return-item>";
+
+    
+            msgg.innerHTML = " successfully added ";
+            msg.innerHTML = " ";
+            }
 
         })
 
@@ -83,6 +101,8 @@ export class updatereturns extends HTMLElement {
             <h5 for="category" style="margin-top: 20px; margin-left: 47px; color: rgba(0, 0, 0, 0.39);">Description</h5>
             
             <input type="text" id="description" name="status" value="` + upreply[0].description + `"><br>
+            <p style="color: #ff3860; margin-left:20px" id="invalid"></p>
+            <p style="color: rgba(0, 200, 81, 1); margin-left:20px" id="invalidd"></p>
         </form>
         
         

@@ -37,9 +37,17 @@ export class viewSalesRep extends HTMLElement {
                 const tb = this.shadowRoot.querySelector('#tb');
 
 
-                ipcRenderer.send("deleteSalesRep", reply[i].rep_id)
-                tb.remove()
-
+                const response=ipcRenderer.send("deleteSalesRep", reply[i].rep_id)
+                console.log("records delete status",response);
+                if(response){
+                    tb.remove();
+                    console.log("records deleted");
+                }else{
+                    tb.remove();
+                    console.log("can't delete SalesRep");
+                    alert("can't delete SalesRep");
+                }
+              
                 this.connectedCallback()
 
 

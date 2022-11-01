@@ -12,7 +12,7 @@ export class inventoryChart extends HTMLElement {
     connectedCallback() {
         this.render();
         let reply = ipcRenderer.sendSync('inventoryChart', 2022);
-        console.log(reply)
+        
         const labels = []
         const d = []
         for (let i = 0; i < reply.length; i++) {

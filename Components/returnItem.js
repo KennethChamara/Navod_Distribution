@@ -27,7 +27,7 @@ export class returnItem extends HTMLElement {
             row.insertCell(4).innerHTML = reply[i].quantity;
             row.insertCell(5).innerHTML = reply[i].description;
             row.insertCell(6).innerHTML = "<img src='images/icons8-delete-16.png' id='del" + i + "'>";
-            row.insertCell(7).innerHTML = `<a onclick='updatereturns(${reply[i].p_id},${reply[i].customer_id},"${reply[i].date}")'><img src='images/icons8-update-48.png' style="width:25%; height:25%;"></a>`;
+            row.insertCell(7).innerHTML = `<a onclick='updatereturns(${reply[i].p_id},${reply[i].customer_id},"${reply[i].date}")'><img src='images/icons8-update-48.png' style="width:100%; height:100%;"></a>`;
 
             const dele = this.shadowRoot.querySelector("#del" + i);
             dele.addEventListener("click", () => {

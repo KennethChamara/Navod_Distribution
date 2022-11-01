@@ -96,7 +96,7 @@ export class repAnalysis extends HTMLElement {
         <div class="row">
             <div class="col-4">
                 <div class="" style="padding:2%">
-                <input list="browsers" name="month" id="month" value=` + m + ` >
+                <input list="browsers" name="month" id="month" placeholder=` + m + ` >
                 <datalist id="browsers">
                   <option value="January">
                   <option value="February">
@@ -116,7 +116,7 @@ export class repAnalysis extends HTMLElement {
             </div>
             <div class="col-6">
                 <div class="" style="padding:1%">
-                <input list="browsers1" name="year" id="year" style="width:100%" value=` + y + `>
+                <input list="browsers1" name="year" id="year" style="width:100%" placeholder=` + y + `>
                 <datalist id="browsers1">
                 <option value="2018">
                 <option value="2019">

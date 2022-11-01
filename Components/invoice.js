@@ -18,14 +18,19 @@ export class Invoice extends HTMLElement {
         const table = this.shadowRoot.querySelector('#tbl');
 
         for (let i = 0; i < reply.length; i++) {
+            
             const row = table.insertRow(i + 1);
 
-
-            row.insertCell(0).innerHTML = reply[i].pname;
-            row.insertCell(1).innerHTML = reply[i].price;
-            row.insertCell(2).innerHTML = reply[i].total;
-            row.insertCell(3).innerHTML = reply[i].value;
-            row.insertCell(4).innerHTML = reply1[i].quantity - reply[i].total;
+            try{
+                row.insertCell(0).innerHTML = reply[i].pname;
+                row.insertCell(1).innerHTML = reply[i].price;
+                row.insertCell(2).innerHTML = reply[i].total;
+                row.insertCell(3).innerHTML = reply[i].value;
+                row.insertCell(4).innerHTML = reply1[i].quantity - reply[i].total;
+            }catch(exception){
+                
+            }
+            
 
 
 
@@ -39,7 +44,7 @@ export class Invoice extends HTMLElement {
         <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
         <link rel="stylesheet" type="" href="bootstrap-5.2.0-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="" href="Components/invoice.css">
-        <div class="container" style="width: 35%;">
+        <div class="container" style="width: 40%;">
         <div class="row">
             <div class="col-2">
                 <img src="images/kotmale-kisK26bHwB (1).png" alt="" style="height: 70%; width:160%">

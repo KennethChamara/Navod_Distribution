@@ -35,7 +35,8 @@ export class viewProduct extends HTMLElement {
                 if(response){
                     tb.remove();
                     console.log("records deleted");
-                }else{
+                }else{ 
+                    tb.remove();
                     console.log("can't delete product");
                     alert("can't delete product");
                 }
