@@ -12,6 +12,7 @@ export class updatereturns extends HTMLElement {
     connectedCallback() {
 
         var upreply = ipcRenderer.sendSync('updatereturns', this.getAttribute("p_id"), this.getAttribute("customer_id"), this.getAttribute("date"));
+        console.log(upreply);
         var upcus = ipcRenderer.sendSync('selectcustomer', upreply[0].customer_id);
         var upcus1 = ipcRenderer.sendSync('selectcustomer1',upreply[0].p_id);
         console.log(upreply[0].customer_id);

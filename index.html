@@ -177,10 +177,18 @@
     document.getElementById("myLinks").style.display = "none";
 }
     function updatereturns(p_id, customer_id, date) {
+            date=convert(date);
             document.getElementById("main-body").innerHTML = `<update-returns p_id="${p_id}" customer_id="${customer_id}" date="${date}"></update-returns>`;
 }
 function updatepayment(payment_id) {
             document.getElementById("main-body").innerHTML = `<update-payment payment_id="${payment_id}"></update-payment>`;
+}
+
+function convert(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
 }
 
 
